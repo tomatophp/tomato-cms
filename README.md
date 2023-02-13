@@ -1,6 +1,6 @@
 # Tomato cms
 
-full CMS System to manage your conetent build for Tomato PHP
+full CMS System to manage your content build for Tomato PHP
 
 ## Installation
 

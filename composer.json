@@ -1,7 +1,7 @@
 {
     "name": "tomatophp/tomato-cms",
     "type": "library",
-    "description": "full CMS System to manage your conetent build for Tomato PHP",
+    "description": "full CMS System to manage your content build for Tomato PHP",
     "keywords": [
         "php",
         "laravel",
