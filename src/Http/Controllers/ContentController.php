@@ -6,7 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
+use TomatoPHP\TomatoCategory\Models\Category;
+use TomatoPHP\TomatoCategory\Models\Type;
 use TomatoPHP\TomatoPHP\Services\Tomato;
 
 class ContentController extends Controller
@@ -43,6 +46,10 @@ class ContentController extends Controller
     {
         return Tomato::create(
             view: 'tomato-cms::contents.create',
+            data: [
+                'categories' => Category::where('parent_id', null)->with('children')->where('for', 'content')->get(),
+                'types' => Type::where('for', 'content')->get(),
+            ]
         );
     }
 
@@ -57,7 +64,11 @@ class ContentController extends Controller
             model: \TomatoPHP\TomatoCms\Models\Content::class,
             message: __('Content created successfully'),
             redirect: 'admin.contents.index',
+            hasMedia: true,
+            collection: 'images',
         );
+
+        $response['record']->categories()->attach($request->get('categories'));
 
         return $response['redirect'];
     }
@@ -71,6 +82,8 @@ class ContentController extends Controller
         return Tomato::get(
             model: $model,
             view: 'tomato-cms::contents.show',
+            hasMedia: true,
+            collection: 'images',
         );
     }
 
@@ -80,9 +93,20 @@ class ContentController extends Controller
      */
     public function edit(\TomatoPHP\TomatoCms\Models\Content $model): View
     {
+        $model->load('categories');
+        $model->categories = collect($model->categories)->map(function ($item, $key){
+            return $item->id;
+        });
+        $model->slug = Str::slug($model->title);
         return Tomato::get(
             model: $model,
             view: 'tomato-cms::contents.edit',
+            data: [
+                'categories' => Category::where('parent_id', null)->with('children')->where('for', 'content')->get(),
+                'types' => Type::where('for', 'content')->get(),
+            ],
+            hasMedia: true,
+            collection: 'images',
         );
     }
 
@@ -98,7 +122,11 @@ class ContentController extends Controller
             model: $model,
             message: __('Content updated successfully'),
             redirect: 'admin.contents.index',
+            hasMedia: true,
+            collection: 'images',
         );
+
+        $response['record']->categories()->sync($request->get('categories'));
 
         return $response['redirect'];
     }

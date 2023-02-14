@@ -24,16 +24,16 @@ class ContentStoreRequest extends FormRequest
     public function rules()
     {
         return [
-                        'type_id' => 'nullable|exists:types,id',
-            'category_id' => 'nullable|exists:categories,id',
-            'model_id' => 'nullable',
-            'model_type' => 'nullable|max:255|string',
+            'type_id' => 'nullable|exists:types,id',
+            'categories' => 'required|array|min:1',
+            'image' => 'sometimes|file|image|max:2048',
             'title' => 'required|max:255|string',
-            'slug' => 'required|max:255|string',
+            'slug' => 'required|max:255|string|unique:contents,slug',
             'body' => 'required',
             'short_description' => 'nullable|max:65535',
-            'published' => 'nullable',
-            'featured' => 'nullable'
+            'published' => 'nullable|boolean',
+            'published_at' => 'nullable|date',
+            'featured' => 'nullable|boolean'
         ];
     }
 }

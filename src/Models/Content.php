@@ -3,6 +3,8 @@
 namespace TomatoPHP\TomatoCms\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
  * @property integer $id
@@ -23,19 +25,39 @@ use Illuminate\Database\Eloquent\Model;
  * @property Type $type
  * @property ContentsMeta[] $contentsMetas
  */
-class Content extends Model
+class Content extends Model implements HasMedia
 {
+    use InteractsWithMedia;
     /**
      * @var array
      */
-    protected $fillable = ['type_id', 'category_id', 'model_id', 'model_type', 'title', 'slug', 'body', 'short_description', 'published', 'featured', 'published_at', 'created_at', 'updated_at'];
+    protected $fillable = [
+        'type_id',
+        'category_id',
+        'model_id',
+        'model_type',
+        'title',
+        'slug',
+        'body',
+        'short_description',
+        'published',
+        'featured',
+        'published_at',
+        'created_at',
+        'updated_at'
+    ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function category()
     {
-        return $this->belongsTo('TomatoPHP\TomatoCms\Models\Category');
+        return $this->belongsTo('TomatoPHP\TomatoCategory\Models\Category');
+    }
+
+    public function categories()
+    {
+        return $this->morphToMany('TomatoPHP\TomatoCategory\Models\Category', 'categorables');
     }
 
     /**
@@ -43,7 +65,7 @@ class Content extends Model
      */
     public function type()
     {
-        return $this->belongsTo('TomatoPHP\TomatoCms\Models\Type');
+        return $this->belongsTo('TomatoPHP\TomatoCategory\Models\Type');
     }
 
     /**

@@ -24,15 +24,15 @@ class ContentUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-                        'type_id' => 'nullable|exists:types,id',
-            'category_id' => 'nullable|exists:categories,id',
-            'model_id' => 'nullable',
-            'model_type' => 'nullable|max:255|string',
+            'type_id' => 'nullable|exists:types,id',
+            'categories' => 'required|array|min:1',
             'title' => 'sometimes|max:255|string',
-            'slug' => 'sometimes|max:255|string',
+            'image' => 'sometimes|file|image|max:2048',
+            'slug' => 'sometimes|max:255|string|unique:contents,slug,' . $this->route()->parameter('model')->id,
             'body' => 'sometimes',
             'short_description' => 'nullable|max:65535',
             'published' => 'nullable',
+            'published_at' => 'nullable|date',
             'featured' => 'nullable'
         ];
     }
