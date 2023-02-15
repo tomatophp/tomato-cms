@@ -38,10 +38,8 @@ class TomatoCmsInstall extends Command
     {
         $this->info('Publish Vendor Assets');
         $this->callSilent('optimize:clear');
-        $this->yarnCommand(['install']);
-        $this->yarnCommand(['build']);
         $this->artisanCommand(["migrate"]);
         $this->artisanCommand(["optimize:clear"]);
-        $this->info('tomatoCms installed successfully.');
+        $this->info('Tomato CMS installed successfully.');
     }
 }

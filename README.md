@@ -9,37 +9,6 @@ full CMS System to manage your content build for Tomato PHP
 ```bash
 composer require tomatophp/tomato-cms
 ```
-after install your package please run this command
-
-```bash
-php artisan tomato-cms:install
-```
-
-## Publish Assets
-
-you can publish config file by use this command
-
-```bash
-php artisan vendor:publish --tag="tomato-cms-config"
-```
-
-you can publish views file by use this command
-
-```bash
-php artisan vendor:publish --tag="tomato-cms-views"
-```
-
-you can publish languages file by use this command
-
-```bash
-php artisan vendor:publish --tag="tomato-cms-lang"
-```
-
-you can publish migrations file by use this command
-
-```bash
-php artisan vendor:publish --tag="tomato-cms-migrations"
-```
 
 ## Support
 
@@ -59,7 +28,7 @@ Please see [SECURITY](SECURITY.md) for more information about security.
 
 ## Credits
 
-- [Tomatophp](mailto:info@3x1.io)
+- [Fady Mondy](https://www.github.com/3x1io)
 
 ## License
 
