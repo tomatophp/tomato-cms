@@ -58,44 +58,12 @@ class BlockTable extends AbstractTable
             ->export()
             ->defaultSort('id')
             ->column(
-                key: 'id',
-                label: __('Id'),
-                sortable: true)
-            ->column(
                 key: 'title',
                 label: __('Title'),
                 sortable: true)
             ->column(
-                key: 'icon',
-                label: __('Icon'),
-                sortable: true)
-            ->column(
-                key: 'color',
-                label: __('Color'),
-                sortable: true)
-            ->column(
-                key: 'description',
-                label: __('Description'),
-                sortable: true)
-            ->column(
-                key: 'body',
-                label: __('Body'),
-                sortable: true)
-            ->column(
-                key: 'button',
-                label: __('Button'),
-                sortable: true)
-            ->column(
-                key: 'url',
-                label: __('Url'),
-                sortable: true)
-            ->column(
                 key: 'key',
                 label: __('Key'),
-                sortable: true)
-            ->column(
-                key: 'html',
-                label: __('Html'),
                 sortable: true)
             ->column(key: 'actions',label: trans('tomato-admin::global.crud.actions'))
             ->paginate(15);

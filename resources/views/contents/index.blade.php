@@ -13,6 +13,27 @@
         <div class="mx-auto">
             @if(\TomatoPHP\TomatoCms\Models\Content::count())
             <x-splade-table :for="$table" striped>
+                <x-splade-cell short_description>
+                    @if($item->short_description)
+                        {{$item->description}}
+                    @else
+                        -
+                    @endif
+                </x-splade-cell>
+                <x-splade-cell published>
+                    @if($item->published)
+                        <x-heroicon-s-check-circle class="text-green-600 h-8 w-8 ltr:mr-2 rtl:ml-2"/>
+                    @else
+                        <x-heroicon-s-x-circle class="text-red-600 h-8 w-8 ltr:mr-2 rtl:ml-2"/>
+                    @endif
+                </x-splade-cell>
+                <x-splade-cell featured>
+                    @if($item->featured)
+                        <x-heroicon-s-check-circle class="text-green-600 h-8 w-8 ltr:mr-2 rtl:ml-2"/>
+                    @else
+                        <x-heroicon-s-x-circle class="text-red-600 h-8 w-8 ltr:mr-2 rtl:ml-2"/>
+                    @endif
+                </x-splade-cell>
                 <x-splade-cell actions>
                     <div class="flex justify-start">
                         <Link href="/admin/contents/{{ $item->id }}" class="px-2 text-blue-500" modal>

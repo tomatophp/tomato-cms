@@ -70,7 +70,7 @@ class ContentController extends Controller
 
         $response['record']->categories()->attach($request->get('categories'));
 
-        return $response['redirect'];
+        return redirect()->route('admin.contents.edit', $response['record']->id);
     }
 
     /**
@@ -128,7 +128,7 @@ class ContentController extends Controller
 
         $response['record']->categories()->sync($request->get('categories'));
 
-        return $response['redirect'];
+        return redirect()->route('admin.contents.edit', $response['record']->id);
     }
 
     /**

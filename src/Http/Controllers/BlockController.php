@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 use TomatoPHP\TomatoPHP\Services\Tomato;
 
@@ -52,6 +53,14 @@ class BlockController extends Controller
      */
     public function store(\TomatoPHP\TomatoCms\Http\Requests\Block\BlockStoreRequest $request): RedirectResponse
     {
+        $key= Str::slug($request->get('title')).'-'.rand(1000, 9999);
+        $checkKey = \TomatoPHP\TomatoCms\Models\Block::where('key', $key)->first();
+        if(!$checkKey){
+            $request->merge([
+                'key' => $key,
+            ]);
+        }
+
         $response = Tomato::store(
             request: $request,
             model: \TomatoPHP\TomatoCms\Models\Block::class,

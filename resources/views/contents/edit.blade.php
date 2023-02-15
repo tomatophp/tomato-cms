@@ -8,7 +8,7 @@
             'slug' => $model->slug,
             'body' => $model->body,
             'categories' => $model->categories,
-            'image' => $model->image,
+            'images' => $model->images,
             'seo_title' => $model->seo_title,
             'seo_description' => $model->seo_description,
             'seo_keywords' => $model->seo_keywords,
@@ -150,7 +150,7 @@
                 </div>
                 <hr>
                 <div class="py-4 px-4">
-                    <x-splade-file placeholder="{{__('Set Featured Image')}}" name="image" filepond preview />
+                    <x-splade-file placeholder="{{__('Set Featured Image')}}" name="images" filepond preview />
                 </div>
             </div>
 

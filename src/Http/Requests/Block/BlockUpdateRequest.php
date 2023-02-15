@@ -24,14 +24,13 @@ class BlockUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-                        'title' => 'nullable|max:255|string',
+            'title' => 'nullable|max:255|string',
             'icon' => 'nullable|max:255',
             'color' => 'nullable|max:255',
             'description' => 'nullable|max:255|string',
             'body' => 'nullable|max:255|string',
             'button' => 'nullable|max:255|string',
             'url' => 'nullable|max:255|string',
-            'key' => 'sometimes|max:255|string',
             'html' => 'nullable'
         ];
     }

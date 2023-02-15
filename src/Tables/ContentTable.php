@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use ProtoneMedia\Splade\AbstractTable;
 use ProtoneMedia\Splade\Facades\Toast;
 use ProtoneMedia\Splade\SpladeTable;
+use TomatoPHP\TomatoCategory\Models\Type;
 
 class ContentTable extends AbstractTable
 {
@@ -55,45 +56,18 @@ class ContentTable extends AbstractTable
                 after: fn () => Toast::danger(__('Content Has Been Deleted'))->autoDismiss(2),
                 confirm: true
             )
+            ->selectFilter('type_id',
+                options:Type::where('for', 'content')->get()->pluck('name', 'id')->toArray(),
+                label: __('Type'))
             ->export()
             ->defaultSort('id')
-            ->column(
-                key: 'id',
-                label: __('Id'),
-                sortable: true)
-            ->column(
-                key: 'type.name',
-                label: __('Type'),
-                sortable: true,
-                searchable: true)
-            ->column(
-                key: 'category.name',
-                label: __('Category'),
-                sortable: true,
-                searchable: true)
-            ->column(
-                key: 'model_id',
-                label: __('Model id'),
-                sortable: true)
-            ->column(
-                key: 'model_type',
-                label: __('Model type'),
-                sortable: true)
             ->column(
                 key: 'title',
                 label: __('Title'),
                 sortable: true)
             ->column(
-                key: 'slug',
-                label: __('Slug'),
-                sortable: true)
-            ->column(
-                key: 'body',
-                label: __('Body'),
-                sortable: true)
-            ->column(
                 key: 'short_description',
-                label: __('Short description'),
+                label: __('Description'),
                 sortable: true)
             ->column(
                 key: 'published',

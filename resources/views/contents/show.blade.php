@@ -49,19 +49,6 @@
               </div>
           </div>
 
-          <div class="flex justify-between">
-              <div>
-                  <h3 class="text-lg font-bold">
-                      {{__('Slug')}}
-                  </h3>
-              </div>
-              <div>
-                  <h3 class="text-lg">
-                      {{ $model->slug}}
-                  </h3>
-              </div>
-          </div>
-
 
           <div class="flex justify-between">
               <div>
@@ -97,7 +84,11 @@
               </div>
               <div>
                   <h3 class="text-lg">
-                      {{ $model->published}}
+                      @if($model->published)
+                          <x-heroicon-s-check-circle class="text-green-600 h-8 w-8 ltr:mr-2 rtl:ml-2"/>
+                      @else
+                          <x-heroicon-s-x-circle class="text-red-600 h-8 w-8 ltr:mr-2 rtl:ml-2"/>
+                      @endif
                   </h3>
               </div>
           </div>
@@ -110,7 +101,11 @@
               </div>
               <div>
                   <h3 class="text-lg">
-                      {{ $model->featured}}
+                      @if($model->featured)
+                          <x-heroicon-s-check-circle class="text-green-600 h-8 w-8 ltr:mr-2 rtl:ml-2"/>
+                      @else
+                          <x-heroicon-s-x-circle class="text-red-600 h-8 w-8 ltr:mr-2 rtl:ml-2"/>
+                      @endif
                   </h3>
               </div>
           </div>
