@@ -10,6 +10,7 @@ use TomatoPHP\TomatoCms\Views\MarkdownEditor;
 use TomatoPHP\TomatoCms\Views\MarkdownViewer;
 use TomatoPHP\TomatoPHP\Services\Menu\TomatoMenuRegister;
 
+include __DIR__ . '/helpers.php';
 
 class TomatoCmsServiceProvider extends ServiceProvider
 {

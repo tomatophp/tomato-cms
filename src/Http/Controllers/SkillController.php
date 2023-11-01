@@ -64,8 +64,10 @@ class SkillController extends Controller
             request: $request,
             model: \TomatoPHP\TomatoCms\Models\Skill::class,
             validation: [
-                'name' => 'required|max:255|string',
-                'description' => 'nullable|max:255|string',
+                'name' => 'required|array',
+                'name*' => 'required|max:255|string',
+                'description' => 'nullable|array',
+                'description*' => 'nullable|max:255|string',
                 'exp' => 'required',
                 'icon' => 'nullable|max:65535',
                 'url' => 'nullable|max:65535'
@@ -128,8 +130,10 @@ class SkillController extends Controller
             request: $request,
             model: $model,
             validation: [
-                'name' => 'sometimes|max:255|string',
-                'description' => 'nullable|max:255|string',
+                'name' => 'sometimes|array',
+                'name*' => 'sometimes|max:255|string',
+                'description' => 'nullable|array',
+                'description*' => 'nullable|max:255|string',
                 'exp' => 'sometimes',
                 'icon' => 'nullable|max:65535',
                 'url' => 'nullable|max:65535'
