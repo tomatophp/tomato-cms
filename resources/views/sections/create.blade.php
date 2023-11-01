@@ -13,14 +13,14 @@
 
         <x-splade-checkbox label="{{__('Activated')}}" name="activated" label="Activated" />
 
-        <x-tomato-repeater name="body" label="{{__('Body')}}" :options="['type', 'title', 'url']">
+        <x-tomato-admin-repeater name="body" label="{{__('Body')}}" :options="['type', 'title', 'url']">
             <div class="flex flex-col gap-4">
                 <x-splade-input v-model="repeater.main[key].type" label="Type" placeholder="Type"/>
                 <x-splade-input v-model="repeater.main[key].title.ar" label="Title" placeholder="Title [AR]"/>
                 <x-splade-input v-model="repeater.main[key].title.en" label="Title" placeholder="Title [EN]"/>
                 <x-splade-input v-model="repeater.main[key].url" label="URL" placeholder="URL"/>
             </div>
-        </x-tomato-repeater>
+        </x-tomato-admin-repeater>
 
         <x-tomato-admin-submit-buttons table="sections" save cancel />
 
