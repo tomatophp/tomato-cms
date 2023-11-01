@@ -1,73 +1,10 @@
-<x-splade-modal class="font-main">
-    <h1 class="text-2xl font-bold mb-4">{{trans('tomato-admin::global.crud.view')}} {{ __('Comment') }} #{{$model->id}}</h1>
-
-    <div class="flex flex-col space-y-4">
-        
-          <div class="flex justify-between">
-              <div>
-                  <h3 class="text-lg font-bold">
-                      {{__('Account')}}
-                  </h3>
-              </div>
-              <div>
-                  <h3 class="text-lg">
-                      {{ $model->Account->name}}
-                  </h3>
-              </div>
-          </div>
-
-          <div class="flex justify-between">
-              <div>
-                  <h3 class="text-lg font-bold">
-                      {{__('Parent')}}
-                  </h3>
-              </div>
-              <div>
-                  <h3 class="text-lg">
-                      {{ $model->Parent->id}}
-                  </h3>
-              </div>
-          </div>
-
-          
-          <div class="flex justify-between">
-              <div>
-                  <h3 class="text-lg font-bold">
-                      {{__('Model type')}}
-                  </h3>
-              </div>
-              <div>
-                  <h3 class="text-lg">
-                      {{ $model->model_type}}
-                  </h3>
-              </div>
-          </div>
-
-          <div class="flex justify-between">
-              <div>
-                  <h3 class="text-lg font-bold">
-                      {{__('Comment')}}
-                  </h3>
-              </div>
-              <div>
-                  <h3 class="text-lg">
-                      {{ $model->comment}}
-                  </h3>
-              </div>
-          </div>
-
-          <div class="flex justify-between">
-              <div>
-                  <h3 class="text-lg font-bold">
-                      {{__('Active')}}
-                  </h3>
-              </div>
-              <div>
-                  <h3 class="text-lg">
-                      {{ $model->active}}
-                  </h3>
-              </div>
-          </div>
-
+<x-tomato-admin-container label="{{trans('tomato-admin::global.crud.view')}} {{ __('Comment') }} #{{$model->id}}">
+    <div class="grid grid-cols-2 gap-4">
+        <x-tomato-admin-row :value="$model->account?->name" :label="__('Author')" type="text" />
+        <x-tomato-admin-row :value="$model->post?->title" :label="__('Post')" type="text" />
+        <x-tomato-admin-row :value="$model->activated" :label="__('Activated')" type="bool" />
+        <div class="col-span-2">
+            <x-tomato-admin-row :value="$model->comment" :label="__('Comment')" type="text" />
+        </div>
     </div>
-</x-splade-modal>
+</x-tomato-admin-container>

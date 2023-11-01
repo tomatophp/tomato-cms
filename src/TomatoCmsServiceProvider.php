@@ -1,9 +1,13 @@
 <?php
 
-namespace Tomatophp\TomatoCms;
+namespace TomatoPHP\TomatoCms;
 
 use Illuminate\Support\ServiceProvider;
+use TomatoPHP\TomatoAdmin\Facade\TomatoMenu;
+use TomatoPHP\TomatoAdmin\Services\Contracts\Menu;
 use TomatoPHP\TomatoCms\Menus\ContentMenu;
+use TomatoPHP\TomatoCms\Views\MarkdownEditor;
+use TomatoPHP\TomatoCms\Views\MarkdownViewer;
 use TomatoPHP\TomatoPHP\Services\Menu\TomatoMenuRegister;
 
 
@@ -13,7 +17,7 @@ class TomatoCmsServiceProvider extends ServiceProvider
     {
         //Register generate command
         $this->commands([
-           \Tomatophp\TomatoCms\Console\TomatoCmsInstall::class,
+           \TomatoPHP\TomatoCms\Console\TomatoCmsInstall::class,
         ]);
 
         //Register Config file
@@ -50,12 +54,54 @@ class TomatoCmsServiceProvider extends ServiceProvider
         //Register Routes
         $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
 
-        TomatoMenuRegister::registerMenu(ContentMenu::class);
-
     }
 
     public function boot(): void
     {
         //you boot methods here
+
+        TomatoMenu::register([
+            Menu::make()
+                ->group(__("CMS"))
+                ->label(__("Posts"))
+                ->icon("bx bx-paperclip")
+                ->route("admin.posts.index"),
+            Menu::make()
+                ->group(__("CMS"))
+                ->label(__("Sections"))
+                ->icon("bx bx-code-block")
+                ->route("admin.sections.index"),
+            Menu::make()
+                ->group(__("CMS"))
+                ->label(__("Photos"))
+                ->icon("bx bxs-image")
+                ->route("admin.photos.index"),
+            Menu::make()
+                ->group(__("Services"))
+                ->label(__("Services"))
+                ->icon("bx bxl-sketch")
+                ->route("admin.services.index"),
+            Menu::make()
+                ->group(__("Services"))
+                ->label(__("Portfolios"))
+                ->icon("bx bxs-hard-hat")
+                ->route("admin.portfolios.index"),
+            Menu::make()
+                ->group(__("Services"))
+                ->label(__("Skills"))
+                ->icon("bx bx-dumbbell")
+                ->route("admin.skills.index"),
+            Menu::make()
+                ->group(__("Services"))
+                ->label(__("Testimonials"))
+                ->icon("bx bxs-comment-check")
+                ->route("admin.testimonials.index"),
+        ]);
+
+        $this->loadViewComponentsAs('tomato', [
+            MarkdownEditor::class,
+            MarkdownViewer::class
+        ]);
+
     }
 }

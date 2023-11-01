@@ -1,9 +1,10 @@
 <?php
 
-namespace Tomatophp\TomatoCms\Console;
+namespace TomatoPHP\TomatoCms\Console;
 
 use Illuminate\Console\Command;
 use TomatoPHP\ConsoleHelpers\Traits\RunCommand;
+use TomatoPHP\TomatoCategory\Models\Type;
 
 class TomatoCmsInstall extends Command
 {
@@ -38,10 +39,51 @@ class TomatoCmsInstall extends Command
     {
         $this->info('Publish Vendor Assets');
         $this->callSilent('optimize:clear');
-        $this->yarnCommand(['install']);
-        $this->yarnCommand(['build']);
         $this->artisanCommand(["migrate"]);
         $this->artisanCommand(["optimize:clear"]);
+        $arrayOfTypes = [
+            [
+                "name" => [
+                    "ar" => "المقالات",
+                    "en" => "Posts"
+                ],
+                "key" => "post",
+                "for" => "posts",
+                "type" => "type"
+            ],
+            [
+                "name" => [
+                    "ar" => "معلومة",
+                    "en" => "Info"
+                ],
+                "key" => "info",
+                "for" => "posts",
+                "type" => "type"
+            ],
+            [
+                "name" => [
+                    "ar" => "مفتوح المصدر",
+                    "en" => "Open Source"
+                ],
+                "key" => "open-source",
+                "for" => "posts",
+                "type" => "type"
+            ],
+            [
+                "name" => [
+                    "ar" => "فيديوهات",
+                    "en" => "Videos"
+                ],
+                "key" => "videos",
+                "for" => "posts",
+                "type" => "type"
+            ]
+        ];
+        foreach ($arrayOfTypes as $type){
+            if(!Type::where('key', $type['key'])->first()){
+                Type::create($type);
+            }
+        }
         $this->info('Tomato CMS installed successfully.');
     }
 }

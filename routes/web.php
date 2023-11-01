@@ -4,47 +4,61 @@
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['web','auth', 'splade', 'verified'])->name('admin.')->group(function () {
-    Route::get('admin/contents', [\TomatoPHP\TomatoCms\Http\Controllers\ContentController::class, 'index'])->name('contents.index');
-    Route::get('admin/contents/api', [\TomatoPHP\TomatoCms\Http\Controllers\ContentController::class, 'api'])->name('contents.api');
-    Route::get('admin/contents/create', [\TomatoPHP\TomatoCms\Http\Controllers\ContentController::class, 'create'])->name('contents.create');
-    Route::post('admin/contents', [\TomatoPHP\TomatoCms\Http\Controllers\ContentController::class, 'store'])->name('contents.store');
-    Route::get('admin/contents/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\ContentController::class, 'show'])->name('contents.show');
-    Route::get('admin/contents/{model}/edit', [\TomatoPHP\TomatoCms\Http\Controllers\ContentController::class, 'edit'])->name('contents.edit');
-    Route::post('admin/contents/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\ContentController::class, 'update'])->name('contents.update');
-    Route::delete('admin/contents/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\ContentController::class, 'destroy'])->name('contents.destroy');
+    Route::get('admin/services', [\TomatoPHP\TomatoCms\Http\Controllers\ServiceController::class, 'index'])->name('services.index');
+    Route::get('admin/services/api', [\TomatoPHP\TomatoCms\Http\Controllers\ServiceController::class, 'api'])->name('services.api');
+    Route::get('admin/services/create', [\TomatoPHP\TomatoCms\Http\Controllers\ServiceController::class, 'create'])->name('services.create');
+    Route::post('admin/services', [\TomatoPHP\TomatoCms\Http\Controllers\ServiceController::class, 'store'])->name('services.store');
+    Route::get('admin/services/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\ServiceController::class, 'show'])->name('services.show');
+    Route::get('admin/services/{model}/edit', [\TomatoPHP\TomatoCms\Http\Controllers\ServiceController::class, 'edit'])->name('services.edit');
+    Route::post('admin/services/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\ServiceController::class, 'update'])->name('services.update');
+    Route::delete('admin/services/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\ServiceController::class, 'destroy'])->name('services.destroy');
 });
 
 Route::middleware(['web','auth', 'splade', 'verified'])->name('admin.')->group(function () {
-    Route::get('admin/blocks', [\TomatoPHP\TomatoCms\Http\Controllers\BlockController::class, 'index'])->name('blocks.index');
-    Route::get('admin/blocks/api', [\TomatoPHP\TomatoCms\Http\Controllers\BlockController::class, 'api'])->name('blocks.api');
-    Route::get('admin/blocks/create', [\TomatoPHP\TomatoCms\Http\Controllers\BlockController::class, 'create'])->name('blocks.create');
-    Route::post('admin/blocks', [\TomatoPHP\TomatoCms\Http\Controllers\BlockController::class, 'store'])->name('blocks.store');
-    Route::get('admin/blocks/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\BlockController::class, 'show'])->name('blocks.show');
-    Route::get('admin/blocks/{model}/edit', [\TomatoPHP\TomatoCms\Http\Controllers\BlockController::class, 'edit'])->name('blocks.edit');
-    Route::post('admin/blocks/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\BlockController::class, 'update'])->name('blocks.update');
-    Route::delete('admin/blocks/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\BlockController::class, 'destroy'])->name('blocks.destroy');
+    Route::get('admin/sections', [\TomatoPHP\TomatoCms\Http\Controllers\SectionController::class, 'index'])->name('sections.index');
+    Route::get('admin/sections/api', [\TomatoPHP\TomatoCms\Http\Controllers\SectionController::class, 'api'])->name('sections.api');
+    Route::get('admin/sections/create', [\TomatoPHP\TomatoCms\Http\Controllers\SectionController::class, 'create'])->name('sections.create');
+    Route::get('admin/sections/generate', [\TomatoPHP\TomatoCms\Http\Controllers\SectionController::class, 'generate'])->name('sections.generate');
+    Route::post('admin/sections', [\TomatoPHP\TomatoCms\Http\Controllers\SectionController::class, 'store'])->name('sections.store');
+    Route::get('admin/sections/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\SectionController::class, 'show'])->name('sections.show');
+    Route::get('admin/sections/{model}/edit', [\TomatoPHP\TomatoCms\Http\Controllers\SectionController::class, 'edit'])->name('sections.edit');
+    Route::post('admin/sections/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\SectionController::class, 'update'])->name('sections.update');
+    Route::delete('admin/sections/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\SectionController::class, 'destroy'])->name('sections.destroy');
 });
 
 Route::middleware(['web','auth', 'splade', 'verified'])->name('admin.')->group(function () {
-    Route::get('admin/seos', [\TomatoPHP\TomatoCms\Http\Controllers\SeoController::class, 'index'])->name('seos.index');
-    Route::get('admin/seos/api', [\TomatoPHP\TomatoCms\Http\Controllers\SeoController::class, 'api'])->name('seos.api');
-    Route::get('admin/seos/create', [\TomatoPHP\TomatoCms\Http\Controllers\SeoController::class, 'create'])->name('seos.create');
-    Route::post('admin/seos', [\TomatoPHP\TomatoCms\Http\Controllers\SeoController::class, 'store'])->name('seos.store');
-    Route::get('admin/seos/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\SeoController::class, 'show'])->name('seos.show');
-    Route::get('admin/seos/{model}/edit', [\TomatoPHP\TomatoCms\Http\Controllers\SeoController::class, 'edit'])->name('seos.edit');
-    Route::post('admin/seos/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\SeoController::class, 'update'])->name('seos.update');
-    Route::delete('admin/seos/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\SeoController::class, 'destroy'])->name('seos.destroy');
+    Route::get('admin/portfolios', [\TomatoPHP\TomatoCms\Http\Controllers\PortfolioController::class, 'index'])->name('portfolios.index');
+    Route::post('admin/portfolios/scan', [\TomatoPHP\TomatoCms\Http\Controllers\PortfolioController::class, 'scan'])->name('portfolios.scan');
+    Route::get('admin/portfolios/api', [\TomatoPHP\TomatoCms\Http\Controllers\PortfolioController::class, 'api'])->name('portfolios.api');
+    Route::get('admin/portfolios/create', [\TomatoPHP\TomatoCms\Http\Controllers\PortfolioController::class, 'create'])->name('portfolios.create');
+    Route::post('admin/portfolios', [\TomatoPHP\TomatoCms\Http\Controllers\PortfolioController::class, 'store'])->name('portfolios.store');
+    Route::get('admin/portfolios/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\PortfolioController::class, 'show'])->name('portfolios.show');
+    Route::get('admin/portfolios/{model}/edit', [\TomatoPHP\TomatoCms\Http\Controllers\PortfolioController::class, 'edit'])->name('portfolios.edit');
+    Route::post('admin/portfolios/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\PortfolioController::class, 'update'])->name('portfolios.update');
+    Route::delete('admin/portfolios/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\PortfolioController::class, 'destroy'])->name('portfolios.destroy');
+
 });
 
 Route::middleware(['web','auth', 'splade', 'verified'])->name('admin.')->group(function () {
-    Route::get('admin/contents-metas', [\TomatoPHP\TomatoCms\Http\Controllers\ContentsMetaController::class, 'index'])->name('contents-metas.index');
-    Route::get('admin/contents-metas/api', [\TomatoPHP\TomatoCms\Http\Controllers\ContentsMetaController::class, 'api'])->name('contents-metas.api');
-    Route::get('admin/contents-metas/create', [\TomatoPHP\TomatoCms\Http\Controllers\ContentsMetaController::class, 'create'])->name('contents-metas.create');
-    Route::post('admin/contents-metas', [\TomatoPHP\TomatoCms\Http\Controllers\ContentsMetaController::class, 'store'])->name('contents-metas.store');
-    Route::get('admin/contents-metas/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\ContentsMetaController::class, 'show'])->name('contents-metas.show');
-    Route::get('admin/contents-metas/{model}/edit', [\TomatoPHP\TomatoCms\Http\Controllers\ContentsMetaController::class, 'edit'])->name('contents-metas.edit');
-    Route::post('admin/contents-metas/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\ContentsMetaController::class, 'update'])->name('contents-metas.update');
-    Route::delete('admin/contents-metas/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\ContentsMetaController::class, 'destroy'])->name('contents-metas.destroy');
+    Route::get('admin/testimonials', [\TomatoPHP\TomatoCms\Http\Controllers\TestimonialController::class, 'index'])->name('testimonials.index');
+    Route::get('admin/testimonials/api', [\TomatoPHP\TomatoCms\Http\Controllers\TestimonialController::class, 'api'])->name('testimonials.api');
+    Route::get('admin/testimonials/create', [\TomatoPHP\TomatoCms\Http\Controllers\TestimonialController::class, 'create'])->name('testimonials.create');
+    Route::post('admin/testimonials', [\TomatoPHP\TomatoCms\Http\Controllers\TestimonialController::class, 'store'])->name('testimonials.store');
+    Route::get('admin/testimonials/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\TestimonialController::class, 'show'])->name('testimonials.show');
+    Route::get('admin/testimonials/{model}/edit', [\TomatoPHP\TomatoCms\Http\Controllers\TestimonialController::class, 'edit'])->name('testimonials.edit');
+    Route::post('admin/testimonials/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\TestimonialController::class, 'update'])->name('testimonials.update');
+    Route::delete('admin/testimonials/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\TestimonialController::class, 'destroy'])->name('testimonials.destroy');
+});
+
+Route::middleware(['web','auth', 'splade', 'verified'])->name('admin.')->group(function () {
+    Route::get('admin/posts', [\TomatoPHP\TomatoCms\Http\Controllers\PostController::class, 'index'])->name('posts.index');
+    Route::get('admin/posts/api', [\TomatoPHP\TomatoCms\Http\Controllers\PostController::class, 'api'])->name('posts.api');
+    Route::get('admin/posts/create', [\TomatoPHP\TomatoCms\Http\Controllers\PostController::class, 'create'])->name('posts.create');
+    Route::post('admin/posts', [\TomatoPHP\TomatoCms\Http\Controllers\PostController::class, 'store'])->name('posts.store');
+    Route::get('admin/posts/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\PostController::class, 'show'])->name('posts.show');
+    Route::get('admin/posts/{model}/edit', [\TomatoPHP\TomatoCms\Http\Controllers\PostController::class, 'edit'])->name('posts.edit');
+    Route::post('admin/posts/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\PostController::class, 'update'])->name('posts.update');
+    Route::delete('admin/posts/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\PostController::class, 'destroy'])->name('posts.destroy');
 });
 
 Route::middleware(['web','auth', 'splade', 'verified'])->name('admin.')->group(function () {
@@ -56,4 +70,27 @@ Route::middleware(['web','auth', 'splade', 'verified'])->name('admin.')->group(f
     Route::get('admin/comments/{model}/edit', [\TomatoPHP\TomatoCms\Http\Controllers\CommentController::class, 'edit'])->name('comments.edit');
     Route::post('admin/comments/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\CommentController::class, 'update'])->name('comments.update');
     Route::delete('admin/comments/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\CommentController::class, 'destroy'])->name('comments.destroy');
+});
+
+Route::middleware(['web','auth', 'splade', 'verified'])->name('admin.')->group(function () {
+    Route::get('admin/photos', [\TomatoPHP\TomatoCms\Http\Controllers\PhotoController::class, 'index'])->name('photos.index');
+    Route::get('admin/photos/api', [\TomatoPHP\TomatoCms\Http\Controllers\PhotoController::class, 'api'])->name('photos.api');
+    Route::get('admin/photos/create', [\TomatoPHP\TomatoCms\Http\Controllers\PhotoController::class, 'create'])->name('photos.create');
+    Route::post('admin/photos', [\TomatoPHP\TomatoCms\Http\Controllers\PhotoController::class, 'store'])->name('photos.store');
+    Route::get('admin/photos/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\PhotoController::class, 'show'])->name('photos.show');
+    Route::get('admin/photos/{model}/edit', [\TomatoPHP\TomatoCms\Http\Controllers\PhotoController::class, 'edit'])->name('photos.edit');
+    Route::post('admin/photos/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\PhotoController::class, 'update'])->name('photos.update');
+    Route::delete('admin/photos/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\PhotoController::class, 'destroy'])->name('photos.destroy');
+});
+
+
+Route::middleware(['web','auth', 'splade', 'verified'])->name('admin.')->group(function () {
+    Route::get('admin/skills', [\TomatoPHP\TomatoCms\Http\Controllers\SkillController::class, 'index'])->name('skills.index');
+    Route::get('admin/skills/api', [\TomatoPHP\TomatoCms\Http\Controllers\SkillController::class, 'api'])->name('skills.api');
+    Route::get('admin/skills/create', [\TomatoPHP\TomatoCms\Http\Controllers\SkillController::class, 'create'])->name('skills.create');
+    Route::post('admin/skills', [\TomatoPHP\TomatoCms\Http\Controllers\SkillController::class, 'store'])->name('skills.store');
+    Route::get('admin/skills/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\SkillController::class, 'show'])->name('skills.show');
+    Route::get('admin/skills/{model}/edit', [\TomatoPHP\TomatoCms\Http\Controllers\SkillController::class, 'edit'])->name('skills.edit');
+    Route::post('admin/skills/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\SkillController::class, 'update'])->name('skills.update');
+    Route::delete('admin/skills/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\SkillController::class, 'destroy'])->name('skills.destroy');
 });

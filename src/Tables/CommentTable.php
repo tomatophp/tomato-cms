@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use ProtoneMedia\Splade\AbstractTable;
 use ProtoneMedia\Splade\Facades\Toast;
 use ProtoneMedia\Splade\SpladeTable;
+use TomatoPHP\TomatoCms\Models\Comment;
 
 class CommentTable extends AbstractTable
 {
@@ -14,9 +15,14 @@ class CommentTable extends AbstractTable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(mixed $query=null)
     {
-        //
+        if($query){
+            $this->query = $query;
+        }
+        else {
+            $this->query = \TomatoPHP\TomatoCms\Models\Comment::query();
+        }
     }
 
     /**
@@ -36,7 +42,7 @@ class CommentTable extends AbstractTable
      */
     public function for()
     {
-        return \TomatoPHP\TomatoCms\Models\Comment::query();
+        return $this->query;
     }
 
     /**
@@ -48,10 +54,10 @@ class CommentTable extends AbstractTable
     public function configure(SpladeTable $table)
     {
         $table
-            ->withGlobalSearch(label: trans('tomato-admin::global.search'),columns: ['id','account.name','parent.id',])
+            ->withGlobalSearch(label: trans('tomato-admin::global.search'),columns: ['id','customer.id','post.title',])
             ->bulkAction(
                 label: trans('tomato-admin::global.crud.delete'),
-                each: fn (\TomatoPHP\TomatoCms\Models\Comment $model) => $model->delete(),
+                each: fn (Comment $model) => $model->delete(),
                 after: fn () => Toast::danger(__('Comment Has Been Deleted'))->autoDismiss(2),
                 confirm: true
             )
@@ -63,29 +69,21 @@ class CommentTable extends AbstractTable
                 sortable: true)
             ->column(
                 key: 'account.name',
-                label: __('Account'),
+                label: __('Customer'),
                 sortable: true,
                 searchable: true)
             ->column(
-                key: 'parent.id',
-                label: __('Parent'),
+                key: 'post.title',
+                label: __('Post'),
                 sortable: true,
                 searchable: true)
-            ->column(
-                key: 'model_id',
-                label: __('Model id'),
-                sortable: true)
-            ->column(
-                key: 'model_type',
-                label: __('Model type'),
-                sortable: true)
             ->column(
                 key: 'comment',
                 label: __('Comment'),
                 sortable: true)
             ->column(
-                key: 'active',
-                label: __('Active'),
+                key: 'activated',
+                label: __('Activated'),
                 sortable: true)
             ->column(key: 'actions',label: trans('tomato-admin::global.crud.actions'))
             ->paginate(15);

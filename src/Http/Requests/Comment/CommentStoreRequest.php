@@ -24,12 +24,10 @@ class CommentStoreRequest extends FormRequest
     public function rules()
     {
         return [
-                        'account_id' => 'required|exists:accounts,id',
-            'parent_id' => 'nullable|exists:comments,id',
-            'model_id' => 'required',
-            'model_type' => 'required|max:255|string',
+            'account_id' => 'required|exists:accounts,id',
+            'post_id' => 'required|exists:posts,id',
             'comment' => 'required|max:65535',
-            'active' => 'required'
+            'activated' => 'required'
         ];
     }
 }

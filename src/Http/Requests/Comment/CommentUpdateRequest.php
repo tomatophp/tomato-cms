@@ -24,12 +24,10 @@ class CommentUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-                        'account_id' => 'sometimes|exists:accounts,id',
-            'parent_id' => 'nullable|exists:comments,id',
-            'model_id' => 'sometimes',
-            'model_type' => 'sometimes|max:255|string',
+            'account_id' => 'sometimes|exists:accounts,id',
+            'post_id' => 'sometimes|exists:posts,id',
             'comment' => 'sometimes|max:65535',
-            'active' => 'sometimes'
+            'activated' => 'sometimes'
         ];
     }
 }

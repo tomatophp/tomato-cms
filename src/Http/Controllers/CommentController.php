@@ -7,7 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use TomatoPHP\TomatoPHP\Services\Tomato;
+use TomatoPHP\TomatoAdmin\Facade\Tomato;
 
 class CommentController extends Controller
 {
@@ -19,6 +19,7 @@ class CommentController extends Controller
     {
         return Tomato::index(
             request: $request,
+            model: \TomatoPHP\TomatoCms\Models\Comment::class,
             view: 'tomato-cms::comments.index',
             table: \TomatoPHP\TomatoCms\Tables\CommentTable::class,
         );
@@ -59,7 +60,7 @@ class CommentController extends Controller
             redirect: 'admin.comments.index',
         );
 
-        return $response['redirect'];
+        return redirect()->back();
     }
 
     /**
@@ -100,7 +101,7 @@ class CommentController extends Controller
             redirect: 'admin.comments.index',
         );
 
-        return $response['redirect'];
+        return redirect()->back();
     }
 
     /**
@@ -109,10 +110,13 @@ class CommentController extends Controller
      */
     public function destroy(\TomatoPHP\TomatoCms\Models\Comment $model): RedirectResponse
     {
-        return Tomato::destroy(
+        $response = Tomato::destroy(
             model: $model,
             message: __('Comment deleted successfully'),
             redirect: 'admin.comments.index',
         );
+
+        return $response->redirect;
+
     }
 }
