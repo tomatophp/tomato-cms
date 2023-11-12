@@ -11,27 +11,25 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if(config('tomato-support.features.pages')) {
-            Schema::create('pages', function (Blueprint $table) {
-                $table->id();
+        Schema::create('pages', function (Blueprint $table) {
+            $table->id();
 
-                //Page Info
-                $table->string('color')->nullable();
-                $table->json('title');
-                $table->json('short_description')->nullable();
-                $table->string('slug')->unique()->index();
-                $table->json('body')->nullable();
+            //Page Info
+            $table->string('color')->nullable();
+            $table->json('title');
+            $table->json('short_description')->nullable();
+            $table->string('slug')->unique()->index();
+            $table->json('body')->nullable();
 
-                //Active The Page
-                $table->boolean('is_active')->default(true)->nullable();
+            //Active The Page
+            $table->boolean('is_active')->default(true)->nullable();
 
-                //Return to Blade View
-                $table->boolean('has_view')->default(false)->nullable();
-                $table->string('view')->nullable();
+            //Return to Blade View
+            $table->boolean('has_view')->default(false)->nullable();
+            $table->string('view')->nullable();
 
-                $table->timestamps();
-            });
-        }
+            $table->timestamps();
+        });
     }
 
     /**

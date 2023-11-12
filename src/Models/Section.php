@@ -3,43 +3,43 @@
 namespace TomatoPHP\TomatoCms\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Translatable\HasTranslations;
+use TomatoPHP\TomatoForms\Models\Form;
 
 /**
  * @property integer $id
  * @property string $type
- * @property string $place
- * @property string $title
- * @property string $description
- * @property string $button
- * @property string $url
- * @property array $body
+ * @property string $view
+ * @property string $key
+ * @property int $form_id
+ * @property array $form
  * @property string $color
- * @property string $bg
  * @property string $icon
- * @property string $subtitle
  * @property boolean $activated
  * @property string $created_at
  * @property string $updated_at
  */
-class Section extends Model
+class Section extends Model implements HasMedia
 {
-    use HasTranslations;
+    use InteractsWithMedia;
 
-    public $translatable = [
-        'title',
-        'subtitle',
-        'description',
-        'button'
-    ];
     /**
      * @var array
      */
-    protected $fillable = ['color','bg','icon','subtitle','type', 'place', 'title', 'description', 'button', 'url', 'body', 'activated', 'created_at', 'updated_at'];
+    protected $fillable = ['color','icon','type', 'view', 'key', 'form_id', 'activated', 'created_at', 'updated_at'];
 
 
     protected $casts = [
         'activated' => 'boolean',
-        'body' => 'array',
     ];
+
+    public function form(){
+        return $this->belongsTo(Form::class, 'form_id');
+    }
+
+    public function pages(){
+       return $this->belongsToMany('TomatoPHP\TomatoCms\Models\Page', 'page_has_sections', 'section_id', 'page_id');
+    }
 }

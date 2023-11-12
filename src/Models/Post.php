@@ -88,4 +88,24 @@ class Post extends Model implements HasMedia
     {
         return $this->belongsToMany(Category::class, 'posts_has_tags', null, 'tag_id');
     }
+
+    public function postMeta()
+    {
+        return $this->hasMany('TomatoPHP\TomatoCms\Models\PostMeta');
+    }
+
+    /**
+     * @param string $key
+     * @param string|null $value
+     * @return Model|string
+     */
+    public function meta(string $key, mixed $value=null): mixed
+    {
+        if($value){
+            return $this->postMeta()->updateOrCreate(['key' => $key], ['value' => $value]);
+        }
+        else {
+            return $this->postMeta()->where('key', $key)->first()?->value;
+        }
+    }
 }

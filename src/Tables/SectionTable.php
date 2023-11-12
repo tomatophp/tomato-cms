@@ -67,12 +67,12 @@ class SectionTable extends AbstractTable
                 label: __('Type'),
                 sortable: true)
             ->column(
-                key: 'place',
-                label: __('Place'),
+                key: 'view',
+                label: __('View'),
                 sortable: true)
             ->column(
-                key: 'title',
-                label: __('Title'),
+                key: 'key',
+                label: __('Key'),
                 sortable: true)
             ->column(
                 key: 'activated',

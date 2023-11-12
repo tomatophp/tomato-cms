@@ -1,26 +1,28 @@
 <x-tomato-admin-container label="{{trans('tomato-admin::global.crud.create')}} {{__('Section')}}">
-    <x-splade-form class="flex flex-col space-y-4" action="{{route('admin.sections.store')}}" method="post" :default="['body' => []]">
+    <x-splade-form class="flex flex-col space-y-4" action="{{route('admin.sections.store')}}" method="post"
+                   :default="['type' => array_keys(config('tomato-cms.sections'))[0]]">
 
-        <x-splade-input label="{{__('Type')}}" name="type" type="text"  placeholder="Type" />
-        <x-splade-input label="{{__('Place')}}" name="place" type="text"  placeholder="Place" />
-        <x-splade-input label="{{__('Title [AR]')}}" name="title[ar]" type="text"  placeholder="Title" />
-        <x-splade-input label="{{__('Title [EN]')}}" name="title[en]" type="text"  placeholder="Title" />
-        <x-splade-input label="{{__('Description [AR]')}}" name="description[ar]" type="text"  placeholder="Description" />
-        <x-splade-input label="{{__('Description [EN]')}}" name="description[en]" type="text"  placeholder="Description" />
-        <x-splade-input label="{{__('Button [AR]')}}" name="button[ar]" type="text"  placeholder="Button" />
-        <x-splade-input label="{{__('Button [EN]')}}" name="button[en]" type="text"  placeholder="Button" />
-        <x-splade-input label="{{__('Url')}}" name="url" type="text"  placeholder="Url" />
-
-        <x-splade-checkbox label="{{__('Activated')}}" name="activated" label="Activated" />
-
-        <x-tomato-admin-repeater name="body" label="{{__('Body')}}" :options="['type', 'title', 'url']">
-            <div class="flex flex-col gap-4">
-                <x-splade-input v-model="repeater.main[key].type" label="Type" placeholder="Type"/>
-                <x-splade-input v-model="repeater.main[key].title.ar" label="Title" placeholder="Title [AR]"/>
-                <x-splade-input v-model="repeater.main[key].title.en" label="Title" placeholder="Title [EN]"/>
-                <x-splade-input v-model="repeater.main[key].url" label="URL" placeholder="URL"/>
-            </div>
-        </x-tomato-admin-repeater>
+        <x-splade-select choices label="{{__('Type')}}" name="type" placeholder="{{__('Type')}}">
+            @foreach(config('tomato-cms.sections') as $key => $section)
+                <option value="{{$key}}">{{$section}}</option>
+            @endforeach
+            <options value=""></options>
+        </x-splade-select>
+        <x-splade-input label="{{__('Key')}}" name="key" type="text"  placeholder="{{__('Key')}}" />
+        <x-splade-input label="{{__('View Path')}}" name="view" type="text"  placeholder="{{__('View Path')}}" />
+        <div class="flex justifiy-between gap-4">
+            <x-splade-input label="{{__('Icon')}}" name="icon" placeholder="bx bx-user" class="w-full" />
+            <x-tomato-admin-color label="{{__('Color')}}" name="color" />
+        </div>
+        <x-splade-select choices
+                         remote-root="data"
+                         :remote-url="route('admin.forms.api')"
+                         option-value="id"
+                         option-label="title.{{app()->getLocale()}}"
+                         name="form_id"
+                         label="{{__('Form')}}"
+                         placeholder="{{__('Form')}}" />
+        <x-splade-checkbox label="{{__('Activated')}}" name="activated" />
 
         <x-tomato-admin-submit-buttons table="sections" save cancel />
 

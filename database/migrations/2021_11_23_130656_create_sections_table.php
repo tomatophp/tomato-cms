@@ -13,27 +13,22 @@ class CreateSectionsTable extends Migration
      */
     public function up()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+        Schema::dropIfExists('sections');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
+
         Schema::create('sections', function (Blueprint $table) {
             $table->id();
 
             //Type
-            $table->string('type')->default('slider');
-            $table->string('place')->default('header');
-
-            //Text
-            $table->json('title')->nullable();
-            $table->string('subtitle')->nullable();
-            $table->json('description')->nullable();
-            $table->string('icon')->nullable();
-            $table->string('bg')->nullable();
+            $table->string('type')->default('header')->nullable();
+            $table->string('view');
+            $table->string('key')->unique();
             $table->string('color')->nullable();
-
-            //Link
-            $table->json('button')->nullable();
-            $table->string('url')->nullable();
+            $table->string('icon')->default('bx bx-circle')->nullable();
 
             //Code
-            $table->json('body')->nullable();
+            $table->foreignId('form_id')->nullable()->constrained('forms')->onDelete('cascade');
 
             //Option
             $table->boolean('activated')->default(1)->nullable();
@@ -49,6 +44,8 @@ class CreateSectionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sliders');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+        Schema::dropIfExists('sections');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }

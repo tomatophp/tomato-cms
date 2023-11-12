@@ -6,8 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
+use ProtoneMedia\Splade\Facades\Toast;
 use TomatoPHP\TomatoAdmin\Facade\Tomato;
+use TomatoPHP\TomatoCms\Models\Section;
 use TomatoPHP\TomatoCms\Transformers\PagesResource;
 
 class PageController extends Controller
@@ -36,6 +39,69 @@ class PageController extends Controller
             table: \TomatoPHP\TomatoCms\Tables\PageTable::class,
             resource: config('tomato-cms.resources.pages.index')
         );
+    }
+
+    public function builder(Request $request, \TomatoPHP\TomatoCms\Models\Page $model): View|JsonResponse
+    {
+        $sections = Section::where('activated', 1)->get()->groupBy('type');
+        return view('tomato-cms::pages.builder', compact('model', 'sections'));
+    }
+
+    public function meta(Request $request,\TomatoPHP\TomatoCms\Models\Page $model){
+        $request->validate([
+            "section" => "required|exists:sections,id"
+        ]);
+        $section = Section::find($request->get('section'));
+
+        if($section->form){
+            $model->with('pageMeta');
+            return view('tomato-cms::pages.meta', compact('model', 'section'));
+        }
+        else {
+            Toast::danger(__('Sorry This Section Do Not Have Options'))->autoDismiss(2);
+            return redirect()->back();
+        }
+
+    }
+
+    public function metaStore(Request $request, \TomatoPHP\TomatoCms\Models\Page $model){
+        $request->validate([
+            "section" => "required|exists:sections,id"
+        ]);
+
+        $model->meta($request->get('section'), $request->all());
+
+        Toast::success(__('Section updated successfully'))->autoDismiss(2);
+        return redirect()->back();
+    }
+
+    public function remove(Request $request, \TomatoPHP\TomatoCms\Models\Page $model){
+        $request->validate([
+            "section" => "required|exists:page_has_sections,id"
+        ]);
+
+        DB::select('DELETE FROM page_has_sections WHERE id = ?', [$request->get('section')]);
+
+        Toast::success(__('Section removed successfully'))->autoDismiss(2);
+        return redirect()->back();
+    }
+
+    public function sections(Request $request, \TomatoPHP\TomatoCms\Models\Page $model){
+        $request->validate([
+            "section" => "required|exists:sections,id"
+        ]);
+
+        $model->sections()->attach($request->get('section'), ['order' => $model->sections()->count() + 1]);
+
+        Toast::success(__('Section added successfully'))->autoDismiss(2);
+        return redirect()->back();
+    }
+
+    public function clear(\TomatoPHP\TomatoCms\Models\Page $model){
+        $model->sections()->sync([]);
+
+        Toast::success(__('Sections cleared successfully'))->autoDismiss(2);
+        return redirect()->back();
     }
 
     /**
@@ -196,10 +262,5 @@ class PageController extends Controller
         }
 
         return $response->redirect;
-    }
-
-    public function html($slug){
-        $page= \TomatoPHP\TomatoCms\Models\Page::where('slug', $slug)->firstOrFail();
-        return view('tomato-cms::pages.html', compact('page'));
     }
 }

@@ -73,16 +73,6 @@ class PageTable extends AbstractTable
                 sortable: true
             )
             ->column(
-                key: 'short_description',
-                label: __('Short description'),
-                sortable: true
-            )
-            ->column(
-                key: 'slug',
-                label: __('Slug'),
-                sortable: true
-            )
-            ->column(
                 key: 'is_active',
                 label: __('Is active'),
                 sortable: true

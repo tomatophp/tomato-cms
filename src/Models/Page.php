@@ -35,4 +35,28 @@ class Page extends Model implements HasMedia
      * @var array
      */
     protected $fillable = ['color', 'title', 'short_description', 'slug', 'body', 'is_active', 'has_view', 'view', 'created_at', 'updated_at'];
+
+    public function sections(){
+        return $this->belongsToMany('TomatoPHP\TomatoCms\Models\Section', 'page_has_sections', 'page_id', 'section_id');
+    }
+
+    public function pageMetas()
+    {
+        return $this->hasMany('TomatoPHP\TomatoCms\Models\PageMeta');
+    }
+
+    /**
+     * @param string $key
+     * @param string|null $value
+     * @return Model|string
+     */
+    public function meta(string $key, mixed $value=null): mixed
+    {
+        if($value){
+            return $this->pageMetas()->updateOrCreate(['key' => $key], ['value' => $value]);
+        }
+        else {
+            return $this->pageMetas()->where('key', $key)->first()?->value;
+        }
+    }
 }

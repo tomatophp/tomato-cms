@@ -3,7 +3,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-
 Route::middleware(['web', 'auth', 'splade', 'verified'])->name('admin.')->group(function () {
     Route::get('admin/pages', [\TomatoPHP\TomatoCms\Http\Controllers\PageController::class, 'index'])->name('pages.index');
     Route::get('admin/pages/api', [\TomatoPHP\TomatoCms\Http\Controllers\PageController::class, 'api'])->name('pages.api');
@@ -11,6 +10,12 @@ Route::middleware(['web', 'auth', 'splade', 'verified'])->name('admin.')->group(
     Route::post('admin/pages', [\TomatoPHP\TomatoCms\Http\Controllers\PageController::class, 'store'])->name('pages.store');
     Route::get('admin/pages/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\PageController::class, 'show'])->name('pages.show');
     Route::get('admin/pages/{model}/edit', [\TomatoPHP\TomatoCms\Http\Controllers\PageController::class, 'edit'])->name('pages.edit');
+    Route::get('admin/pages/{model}/builder', [\TomatoPHP\TomatoCms\Http\Controllers\PageController::class, 'builder'])->name('pages.builder');
+    Route::post('admin/pages/{model}/sections', [\TomatoPHP\TomatoCms\Http\Controllers\PageController::class, 'sections'])->name('pages.sections');
+    Route::delete('admin/pages/{model}/sections/remove', [\TomatoPHP\TomatoCms\Http\Controllers\PageController::class, 'remove'])->name('pages.remove');
+    Route::get('admin/pages/{model}/meta', [\TomatoPHP\TomatoCms\Http\Controllers\PageController::class, 'meta'])->name('pages.meta');
+    Route::post('admin/pages/{model}/meta', [\TomatoPHP\TomatoCms\Http\Controllers\PageController::class, 'metaStore'])->name('pages.meta.store');
+    Route::post('admin/pages/{model}/clear', [\TomatoPHP\TomatoCms\Http\Controllers\PageController::class, 'clear'])->name('pages.clear');
     Route::post('admin/pages/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\PageController::class, 'update'])->name('pages.update');
     Route::delete('admin/pages/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\PageController::class, 'destroy'])->name('pages.destroy');
 });
@@ -106,3 +111,8 @@ Route::middleware(['web','auth', 'splade', 'verified'])->name('admin.')->group(f
     Route::post('admin/skills/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\SkillController::class, 'update'])->name('skills.update');
     Route::delete('admin/skills/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\SkillController::class, 'destroy'])->name('skills.destroy');
 });
+
+Route::fallback(function ($slug){
+    $page= \TomatoPHP\TomatoCms\Models\Page::where('slug', $slug)->firstOrFail();
+    return view('tomato-cms::pages.html', compact('page'));
+})->middleware(['web','splade']);

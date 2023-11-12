@@ -64,18 +64,17 @@ class SectionController extends Controller
             request: $request,
             model: \TomatoPHP\TomatoCms\Models\Section::class,
             validation: [
-                            'type' => 'required|max:255|string',
-            'place' => 'required|max:255|string',
-            'title' => 'nullable',
-            'description' => 'nullable',
-            'button' => 'nullable',
-            'url' => 'nullable|max:255|string',
-            'body' => 'nullable',
-            'activated' => 'nullable',
-            'subtitle' => 'nullable|max:255|string',
-            'icon' => 'nullable|max:255',
-            'bg' => 'nullable|max:255|string',
-            'color' => 'nullable|max:255'
+                'type' => 'required|max:255|string',
+                'view' => ['required', 'max:255','string', function($value, $attribute, $fail) use ($request){
+                    if(!view()->exists($request->get('view'))){
+                        $fail(__('View does not exist'));
+                    }
+                }],
+                'key' => 'required|max:255|string|unique:sections,key',
+                'form_id' => 'nullable|exists:forms,id',
+                'activated' => 'nullable',
+                'icon' => 'nullable|max:255',
+                'color' => 'nullable|max:255'
             ],
             message: __('Section updated successfully'),
             redirect: 'admin.sections.index',
@@ -123,18 +122,17 @@ class SectionController extends Controller
             request: $request,
             model: $model,
             validation: [
-                            'type' => 'sometimes|max:255|string',
-            'place' => 'sometimes|max:255|string',
-            'title' => 'nullable',
-            'description' => 'nullable',
-            'button' => 'nullable',
-            'url' => 'nullable|max:255|string',
-            'body' => 'nullable',
-            'activated' => 'nullable',
-            'subtitle' => 'nullable|max:255|string',
-            'icon' => 'nullable|max:255',
-            'bg' => 'nullable|max:255|string',
-            'color' => 'nullable|max:255'
+                'type' => 'sometimes|max:255|string',
+                'view' => ['sometimes', 'max:255','string', function($value, $attribute, $fail) use ($request){
+                    if(!view()->exists($request->get('view'))){
+                        $fail(__('View does not exist'));
+                    }
+                }],
+                'key' => 'sometimes|max:255|string|unique:sections,key,' . $model->id,
+                'form_id' => 'nullable|exists:forms,id',
+                'activated' => 'nullable',
+                'icon' => 'nullable|max:255',
+                'color' => 'nullable|max:255'
             ],
             message: __('Section updated successfully'),
             redirect: 'admin.sections.index',
