@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use TomatoPHP\TomatoAdmin\Facade\TomatoMenu;
 use TomatoPHP\TomatoAdmin\Services\Contracts\Menu;
 use TomatoPHP\TomatoCms\Menus\ContentMenu;
+use TomatoPHP\TomatoCms\Services\TomatoCmsRegister;
 use TomatoPHP\TomatoCms\Views\MarkdownEditor;
 use TomatoPHP\TomatoCms\Views\MarkdownViewer;
 use TomatoPHP\TomatoPHP\Services\Menu\TomatoMenuRegister;
@@ -108,6 +109,11 @@ class TomatoCmsServiceProvider extends ServiceProvider
             MarkdownEditor::class,
             MarkdownViewer::class
         ]);
+
+
+        app()->bind('tomato-cms', function () {
+            return new TomatoCmsRegister();
+        });
 
     }
 }
