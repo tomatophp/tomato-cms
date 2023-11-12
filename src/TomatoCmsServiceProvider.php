@@ -68,6 +68,11 @@ class TomatoCmsServiceProvider extends ServiceProvider
                 ->icon("bx bx-paperclip")
                 ->route("admin.posts.index"),
             Menu::make()
+                ->group(__('CMS'))
+                ->label(__('Pages'))
+                ->icon('bx bx-file')
+                ->route('admin.pages.index'),
+            Menu::make()
                 ->group(__("CMS"))
                 ->label(__("Sections"))
                 ->icon("bx bx-code-block")

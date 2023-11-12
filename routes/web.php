@@ -3,6 +3,18 @@
 
 use Illuminate\Support\Facades\Route;
 
+
+Route::middleware(['web', 'auth', 'splade', 'verified'])->name('admin.')->group(function () {
+    Route::get('admin/pages', [\TomatoPHP\TomatoCms\Http\Controllers\PageController::class, 'index'])->name('pages.index');
+    Route::get('admin/pages/api', [\TomatoPHP\TomatoCms\Http\Controllers\PageController::class, 'api'])->name('pages.api');
+    Route::get('admin/pages/create', [\TomatoPHP\TomatoCms\Http\Controllers\PageController::class, 'create'])->name('pages.create');
+    Route::post('admin/pages', [\TomatoPHP\TomatoCms\Http\Controllers\PageController::class, 'store'])->name('pages.store');
+    Route::get('admin/pages/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\PageController::class, 'show'])->name('pages.show');
+    Route::get('admin/pages/{model}/edit', [\TomatoPHP\TomatoCms\Http\Controllers\PageController::class, 'edit'])->name('pages.edit');
+    Route::post('admin/pages/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\PageController::class, 'update'])->name('pages.update');
+    Route::delete('admin/pages/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\PageController::class, 'destroy'])->name('pages.destroy');
+});
+
 Route::middleware(['web','auth', 'splade', 'verified'])->name('admin.')->group(function () {
     Route::get('admin/services', [\TomatoPHP\TomatoCms\Http\Controllers\ServiceController::class, 'index'])->name('services.index');
     Route::get('admin/services/api', [\TomatoPHP\TomatoCms\Http\Controllers\ServiceController::class, 'api'])->name('services.api');
