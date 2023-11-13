@@ -3,6 +3,6 @@
         :form="$section->form"
         method="POST"
         action="{{route('admin.pages.meta.store', $model->id)}}"
-        :default="array_merge(['section' => $section->id], $model->meta($section->id) ?? [])"
+        :default="array_merge(['section' => $sectionID], $model->meta($sectionID) ?? [])"
     />
 </x-tomato-admin-container>

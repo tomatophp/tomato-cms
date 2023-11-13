@@ -5,6 +5,7 @@ namespace TomatoPHP\TomatoCms;
 use Illuminate\Support\ServiceProvider;
 use TomatoPHP\TomatoAdmin\Facade\TomatoMenu;
 use TomatoPHP\TomatoAdmin\Services\Contracts\Menu;
+use TomatoPHP\TomatoCms\Console\TomatoSectionGenerator;
 use TomatoPHP\TomatoCms\Menus\ContentMenu;
 use TomatoPHP\TomatoCms\Services\TomatoCmsRegister;
 use TomatoPHP\TomatoCms\Views\MarkdownEditor;
@@ -20,6 +21,7 @@ class TomatoCmsServiceProvider extends ServiceProvider
         //Register generate command
         $this->commands([
            \TomatoPHP\TomatoCms\Console\TomatoCmsInstall::class,
+            TomatoSectionGenerator::class
         ]);
 
         //Register Config file

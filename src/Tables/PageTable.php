@@ -7,6 +7,7 @@ use ProtoneMedia\Splade\AbstractTable;
 use ProtoneMedia\Splade\Facades\Toast;
 use ProtoneMedia\Splade\SpladeTable;
 use Illuminate\Database\Eloquent\Builder;
+use TomatoPHP\TomatoCms\Models\Page;
 
 class PageTable extends AbstractTable
 {
@@ -50,6 +51,7 @@ class PageTable extends AbstractTable
      */
     public function configure(SpladeTable $table)
     {
+        $isLocked = false;
         $table
             ->withGlobalSearch(
                 label: trans('tomato-admin::global.search'),
@@ -57,8 +59,15 @@ class PageTable extends AbstractTable
             )
             ->bulkAction(
                 label: trans('tomato-admin::global.crud.delete'),
-                each: fn (\Modules\FAQ\Models\Page $model) => $model->delete(),
-                after: fn () => Toast::danger(__('Page Has Been Deleted'))->autoDismiss(2),
+                each: function(Page $model, &$isLocked){
+                    if(!$model->lock){
+                        $model->delete();
+                        Toast::danger(__('Page Has Been Deleted'))->autoDismiss(2);
+                    }
+                    else {
+                        Toast::danger(__('Sorry Page #'. $model->id . ' Can Not be deleted because it is locked'))->autoDismiss(2);
+                    }
+                },
                 confirm: true
             )
             ->defaultSort('id', 'desc')

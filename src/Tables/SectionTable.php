@@ -48,12 +48,19 @@ class SectionTable extends AbstractTable
      */
     public function configure(SpladeTable $table)
     {
+        $isLocked = false;
         $table
             ->withGlobalSearch(label: trans('tomato-admin::global.search'),columns: ['id',])
             ->bulkAction(
                 label: trans('tomato-admin::global.crud.delete'),
-                each: fn (Section $model) => $model->delete(),
-                after: fn () => Toast::danger(__('Section Has Been Deleted'))->autoDismiss(2),
+                each: function(Section $model) use ($isLocked){
+                    if(!$model->lock){
+                        $model->delete();
+                    }
+                    else {
+                        Toast::danger(__('Sorry Section #'. $model->id . ' Can Not be deleted because it is locked'))->autoDismiss(2);
+                    }
+                },
                 confirm: true
             )
             ->export()

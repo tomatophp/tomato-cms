@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use ProtoneMedia\Splade\Facades\Toast;
 use TomatoPHP\TomatoAdmin\Facade\Tomato;
 
 class SectionController extends Controller
@@ -151,6 +152,11 @@ class SectionController extends Controller
      */
     public function destroy(\TomatoPHP\TomatoCms\Models\Section $model): RedirectResponse|JsonResponse
     {
+        if($model->lock){
+            Toast::danger(__('Locked Section Can Not Be Deleted'))->autoDismiss(2);
+            return back();
+        }
+
         $response = Tomato::destroy(
             model: $model,
             message: __('Section deleted successfully'),

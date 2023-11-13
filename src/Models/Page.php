@@ -28,13 +28,14 @@ class Page extends Model implements HasMedia
     protected $casts = [
         'is_active' => 'boolean',
         'has_view' => 'boolean',
+        'lock' => 'boolean',
     ];
 
     public $translatable = ['title', 'short_description', 'body'];
     /**
      * @var array
      */
-    protected $fillable = ['color', 'title', 'short_description', 'slug', 'body', 'is_active', 'has_view', 'view', 'created_at', 'updated_at'];
+    protected $fillable = ['lock','color', 'title', 'short_description', 'slug', 'body', 'is_active', 'has_view', 'view', 'created_at', 'updated_at'];
 
     public function sections(){
         return $this->belongsToMany('TomatoPHP\TomatoCms\Models\Section', 'page_has_sections', 'page_id', 'section_id');

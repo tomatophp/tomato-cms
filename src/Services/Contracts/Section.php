@@ -14,6 +14,8 @@ class Section
     public ?int $form_id = null;
     public ?string $color = null;
     public ?string $icon = null;
+    public ?bool $lock = false;
+
 
     public function __construct()
     {
@@ -35,6 +37,7 @@ class Section
             'color' => $this->color,
             'icon' => $this->icon,
             'form_id' => $this->form_id,
+            'lock' => $this->lock,
         ];
     }
 
@@ -86,6 +89,13 @@ class Section
     public function icon(string $icon): static
     {
         $this->icon = $icon;
+        return $this;
+    }
+
+
+    public function lock(string $lock): static
+    {
+        $this->lock = $lock;
         return $this;
     }
 }

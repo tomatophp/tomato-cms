@@ -29,22 +29,23 @@
         @if(count($model->sections))
             <div class="border rounded-lg overflow-hidden">
                 @foreach($model->sections()->orderBy('order')->withPivot('id')->get() as $option)
-                    @if($option->form)
-                        <x-splade-link  href="{{route('admin.pages.meta', $model->id) . '?section='. $option->id}}" modal>
-                            @include($option->view, ['page' => $model, 'section' => $option])
-                        </x-splade-link>
-                    @else
-                        <x-splade-data :default="['showOptions' => false]">
-                            <div @click.prevent="data.showOptions = !data.showOptions">
-                                @include($option->view, ['page' => $model, 'section' => $option])
-                            </div>
-                            <div class="my-4" v-if="data.showOptions">
+                    <x-splade-data :default="['showOptions' => false]">
+
+                        <div @mouseover="data.showOptions = true" @mouseleave="data.showOptions = false" class="relative">
+                            @include($option->view, ['page' => $model, 'section' => $option, 'sectionID' => $option->pivot->id])
+                            <div class="my-4 mx-4 absolute z-0 bottom-0 left-0" v-if="data.showOptions">
+                                @if($option->form)
+                                    <x-tomato-admin-button  href="{{route('admin.pages.meta', $model->id) . '?section='. $option->pivot->id}}" modal>
+                                        <i class="bx bx-edit"></i>
+                                    </x-tomato-admin-button>
+                                @endif
                                 <x-tomato-admin-button danger confirm method="DELETE" :data="['section' => $option->pivot->id]" href="{{route('admin.pages.remove', $model->id)}}">
-                                    {{__('Remove Section')}}
+                                    <i class="bx bx-trash"></i>
                                 </x-tomato-admin-button>
                             </div>
-                        </x-splade-data>
-                    @endif
+                        </div>
+
+                    </x-splade-data>
                 @endforeach
             </div>
         @else

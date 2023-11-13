@@ -7,9 +7,11 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 use ProtoneMedia\Splade\Facades\Toast;
 use TomatoPHP\TomatoAdmin\Facade\Tomato;
+use TomatoPHP\TomatoCms\Models\PageHasSections;
 use TomatoPHP\TomatoCms\Models\Section;
 use TomatoPHP\TomatoCms\Transformers\PagesResource;
 
@@ -49,13 +51,16 @@ class PageController extends Controller
 
     public function meta(Request $request,\TomatoPHP\TomatoCms\Models\Page $model){
         $request->validate([
-            "section" => "required|exists:sections,id"
+            "section" => "required|exists:page_has_sections,id"
         ]);
-        $section = Section::find($request->get('section'));
+
+
+        $section = PageHasSections::find($request->get('section'))->section;
+        $sectionID = $request->get('section');
 
         if($section->form){
             $model->with('pageMeta');
-            return view('tomato-cms::pages.meta', compact('model', 'section'));
+            return view('tomato-cms::pages.meta', compact('model', 'section', 'sectionID'));
         }
         else {
             Toast::danger(__('Sorry This Section Do Not Have Options'))->autoDismiss(2);
@@ -66,10 +71,27 @@ class PageController extends Controller
 
     public function metaStore(Request $request, \TomatoPHP\TomatoCms\Models\Page $model){
         $request->validate([
-            "section" => "required|exists:sections,id"
+            "section" => "required|exists:page_has_sections,id"
         ]);
 
-        $model->meta($request->get('section'), $request->all());
+        $data = $request->all();
+
+        if(isset($data['image'])){
+            $image = $data['image']->storeAs('public/sections', time() . '.' . $request->file('image')->extension());
+            $data['image'] =  url(Str::replace('public', 'storage', $image));
+        }
+
+        if(isset($data['images']) && is_array($data['images'])){
+            $images = [];
+            foreach ($data['images'] as $image){
+                $image = $image->storeAs('public/sections', time() . '.' . $image->extension());
+                $images[] = url(Str::replace('public', 'storage', $image));
+            }
+
+            $data['images'] = $images;
+        }
+
+        $model->meta($request->get('section'), $data);
 
         Toast::success(__('Section updated successfully'))->autoDismiss(2);
         return redirect()->back();
@@ -80,7 +102,7 @@ class PageController extends Controller
             "section" => "required|exists:page_has_sections,id"
         ]);
 
-        DB::select('DELETE FROM page_has_sections WHERE id = ?', [$request->get('section')]);
+        PageHasSections::find($request->get('section'))->delete();
 
         Toast::success(__('Section removed successfully'))->autoDismiss(2);
         return redirect()->back();
@@ -251,6 +273,11 @@ class PageController extends Controller
      */
     public function destroy(\TomatoPHP\TomatoCms\Models\Page $model): RedirectResponse|JsonResponse
     {
+        if($model->lock){
+            Toast::danger(__('Locked Page Can Not Be Deleted'))->autoDismiss(2);
+            return back();
+        }
+
         $response = Tomato::destroy(
             model: $model,
             message: __('Page deleted successfully'),

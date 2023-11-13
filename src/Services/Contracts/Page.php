@@ -9,6 +9,7 @@ class Page
     public ?string $title = null;
     public ?string $slug = null;
     public ?string $body = null;
+    public ?bool $lock = false;
 
     public function __construct()
     {
@@ -26,6 +27,7 @@ class Page
             'title' => $this->title,
             'slug' => $this->slug,
             'body' => $this->body,
+            'lock' => $this->lock,
         ];
     }
 
@@ -52,6 +54,12 @@ class Page
     public function body(string $body): static
     {
         $this->body = $body;
+        return $this;
+    }
+
+    public function lock(string $lock): static
+    {
+        $this->lock = $lock;
         return $this;
     }
 }

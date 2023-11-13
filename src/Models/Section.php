@@ -28,11 +28,12 @@ class Section extends Model implements HasMedia
     /**
      * @var array
      */
-    protected $fillable = ['color','icon','type', 'view', 'key', 'form_id', 'activated', 'created_at', 'updated_at'];
+    protected $fillable = ['lock','color','icon','type', 'view', 'key', 'form_id', 'activated', 'created_at', 'updated_at'];
 
 
     protected $casts = [
         'activated' => 'boolean',
+        'lock' => 'boolean',
     ];
 
     public function form(){
