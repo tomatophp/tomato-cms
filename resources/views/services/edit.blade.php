@@ -18,7 +18,7 @@
                 <x-splade-textarea class="col-span-2" label="{{__('Keywords [AR]')}}" name="keywords[ar]" type="text"  placeholder="Keywords" />
 
                 <div class="col-span-2">
-                    <x-tomato-repeater name="features" label="{{__('Features')}}" :options="['name', 'description', 'icon']">
+                    <x-tomato-admin-repeater name="features" label="{{__('Features')}}" :options="['name', 'description', 'icon']">
                         <div class="flex flex-col gap-4">
                             <x-splade-input v-model="repeater.main[key].name.ar" label="Name" placeholder="Name [AR]"/>
                             <x-splade-input v-model="repeater.main[key].name.en" label="Name" placeholder="Name [EN]"/>
@@ -44,7 +44,7 @@
                 <x-splade-textarea class="col-span-2" label="{{__('Body [EN]')}}" name="body[en]" type="text"  placeholder="Body" />
 
                 <div class="col-span-2">
-                    <x-tomato-repeater name="features" label="{{__('Features')}}" :options="['name', 'description', 'icon']">
+                    <x-tomato-admin-repeater name="features" label="{{__('Features')}}" :options="['name', 'description', 'icon']">
                         <div class="flex flex-col gap-4">
                             <x-splade-input v-model="repeater.main[key].name.ar" label="Name" placeholder="Name [AR]"/>
                             <x-splade-input v-model="repeater.main[key].name.en" label="Name" placeholder="Name [EN]"/>
@@ -52,7 +52,7 @@
                             <x-splade-textarea v-model="repeater.main[key].description.en" label="Description" placeholder="Description [EN]"/>
                             <x-splade-input v-model="repeater.main[key].icon" label="Icon" placeholder="Icon"/>
                         </div>
-                    </x-tomato-repeater>
+                    </x-tomato-admin-repeater>
                 </div>
 
 
