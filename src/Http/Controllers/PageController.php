@@ -11,8 +11,6 @@ use Illuminate\Support\Str;
 use Illuminate\View\View;
 use ProtoneMedia\Splade\Facades\Toast;
 use TomatoPHP\TomatoAdmin\Facade\Tomato;
-use TomatoPHP\TomatoCms\Models\PageHasSections;
-use TomatoPHP\TomatoCms\Models\Section;
 use TomatoPHP\TomatoCms\Transformers\PagesResource;
 
 class PageController extends Controller
@@ -41,89 +39,6 @@ class PageController extends Controller
             table: \TomatoPHP\TomatoCms\Tables\PageTable::class,
             resource: config('tomato-cms.resources.pages.index')
         );
-    }
-
-    public function builder(Request $request, \TomatoPHP\TomatoCms\Models\Page $model): View|JsonResponse
-    {
-        $sections = Section::where('activated', 1)->get()->groupBy('type');
-        return view('tomato-cms::pages.builder', compact('model', 'sections'));
-    }
-
-    public function meta(Request $request,\TomatoPHP\TomatoCms\Models\Page $model){
-        $request->validate([
-            "section" => "required|exists:page_has_sections,id"
-        ]);
-
-
-        $section = PageHasSections::find($request->get('section'))->section;
-        $sectionID = $request->get('section');
-
-        if($section->form){
-            $model->with('pageMeta');
-            return view('tomato-cms::pages.meta', compact('model', 'section', 'sectionID'));
-        }
-        else {
-            Toast::danger(__('Sorry This Section Do Not Have Options'))->autoDismiss(2);
-            return redirect()->back();
-        }
-
-    }
-
-    public function metaStore(Request $request, \TomatoPHP\TomatoCms\Models\Page $model){
-        $request->validate([
-            "section" => "required|exists:page_has_sections,id"
-        ]);
-
-        $data = $request->all();
-
-        if(isset($data['image'])){
-            $image = $data['image']->storeAs('public/sections', time() . '.' . $request->file('image')->extension());
-            $data['image'] =  url(Str::replace('public', 'storage', $image));
-        }
-
-        if(isset($data['images']) && is_array($data['images'])){
-            $images = [];
-            foreach ($data['images'] as $image){
-                $image = $image->storeAs('public/sections', time() . '.' . $image->extension());
-                $images[] = url(Str::replace('public', 'storage', $image));
-            }
-
-            $data['images'] = $images;
-        }
-
-        $model->meta($request->get('section'), $data);
-
-        Toast::success(__('Section updated successfully'))->autoDismiss(2);
-        return redirect()->back();
-    }
-
-    public function remove(Request $request, \TomatoPHP\TomatoCms\Models\Page $model){
-        $request->validate([
-            "section" => "required|exists:page_has_sections,id"
-        ]);
-
-        PageHasSections::find($request->get('section'))->delete();
-
-        Toast::success(__('Section removed successfully'))->autoDismiss(2);
-        return redirect()->back();
-    }
-
-    public function sections(Request $request, \TomatoPHP\TomatoCms\Models\Page $model){
-        $request->validate([
-            "section" => "required|exists:sections,id"
-        ]);
-
-        $model->sections()->attach($request->get('section'), ['order' => $model->sections()->count() + 1]);
-
-        Toast::success(__('Section added successfully'))->autoDismiss(2);
-        return redirect()->back();
-    }
-
-    public function clear(\TomatoPHP\TomatoCms\Models\Page $model){
-        $model->sections()->sync([]);
-
-        Toast::success(__('Sections cleared successfully'))->autoDismiss(2);
-        return redirect()->back();
     }
 
     /**

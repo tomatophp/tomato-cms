@@ -5,14 +5,12 @@ namespace TomatoPHP\TomatoCms;
 use Illuminate\Support\ServiceProvider;
 use TomatoPHP\TomatoAdmin\Facade\TomatoMenu;
 use TomatoPHP\TomatoAdmin\Services\Contracts\Menu;
-use TomatoPHP\TomatoCms\Console\TomatoSectionGenerator;
 use TomatoPHP\TomatoCms\Menus\ContentMenu;
 use TomatoPHP\TomatoCms\Services\TomatoCmsRegister;
 use TomatoPHP\TomatoCms\Views\MarkdownEditor;
 use TomatoPHP\TomatoCms\Views\MarkdownViewer;
 use TomatoPHP\TomatoPHP\Services\Menu\TomatoMenuRegister;
 
-include __DIR__ . '/helpers.php';
 
 class TomatoCmsServiceProvider extends ServiceProvider
 {
@@ -20,8 +18,7 @@ class TomatoCmsServiceProvider extends ServiceProvider
     {
         //Register generate command
         $this->commands([
-           \TomatoPHP\TomatoCms\Console\TomatoCmsInstall::class,
-            TomatoSectionGenerator::class
+           \TomatoPHP\TomatoCms\Console\TomatoCmsInstall::class
         ]);
 
         //Register Config file
@@ -77,31 +74,26 @@ class TomatoCmsServiceProvider extends ServiceProvider
                 ->route('admin.pages.index'),
             Menu::make()
                 ->group(__("CMS"))
-                ->label(__("Sections"))
-                ->icon("bx bx-code-block")
-                ->route("admin.sections.index"),
-            Menu::make()
-                ->group(__("CMS"))
                 ->label(__("Photos"))
                 ->icon("bx bxs-image")
                 ->route("admin.photos.index"),
             Menu::make()
-                ->group(__("Services"))
+                ->group(__("CMS"))
                 ->label(__("Services"))
                 ->icon("bx bxl-sketch")
                 ->route("admin.services.index"),
             Menu::make()
-                ->group(__("Services"))
+                ->group(__("CMS"))
                 ->label(__("Portfolios"))
                 ->icon("bx bxs-hard-hat")
                 ->route("admin.portfolios.index"),
             Menu::make()
-                ->group(__("Services"))
+                ->group(__("CMS"))
                 ->label(__("Skills"))
                 ->icon("bx bx-dumbbell")
                 ->route("admin.skills.index"),
             Menu::make()
-                ->group(__("Services"))
+                ->group(__("CMS"))
                 ->label(__("Testimonials"))
                 ->icon("bx bxs-comment-check")
                 ->route("admin.testimonials.index"),

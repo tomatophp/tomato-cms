@@ -10,12 +10,6 @@ Route::middleware(['web', 'auth', 'splade', 'verified'])->name('admin.')->group(
     Route::post('admin/pages', [\TomatoPHP\TomatoCms\Http\Controllers\PageController::class, 'store'])->name('pages.store');
     Route::get('admin/pages/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\PageController::class, 'show'])->name('pages.show');
     Route::get('admin/pages/{model}/edit', [\TomatoPHP\TomatoCms\Http\Controllers\PageController::class, 'edit'])->name('pages.edit');
-    Route::get('admin/pages/{model}/builder', [\TomatoPHP\TomatoCms\Http\Controllers\PageController::class, 'builder'])->name('pages.builder');
-    Route::post('admin/pages/{model}/sections', [\TomatoPHP\TomatoCms\Http\Controllers\PageController::class, 'sections'])->name('pages.sections');
-    Route::delete('admin/pages/{model}/sections/remove', [\TomatoPHP\TomatoCms\Http\Controllers\PageController::class, 'remove'])->name('pages.remove');
-    Route::get('admin/pages/{model}/meta', [\TomatoPHP\TomatoCms\Http\Controllers\PageController::class, 'meta'])->name('pages.meta');
-    Route::post('admin/pages/{model}/meta', [\TomatoPHP\TomatoCms\Http\Controllers\PageController::class, 'metaStore'])->name('pages.meta.store');
-    Route::post('admin/pages/{model}/clear', [\TomatoPHP\TomatoCms\Http\Controllers\PageController::class, 'clear'])->name('pages.clear');
     Route::post('admin/pages/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\PageController::class, 'update'])->name('pages.update');
     Route::delete('admin/pages/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\PageController::class, 'destroy'])->name('pages.destroy');
 });
@@ -29,18 +23,6 @@ Route::middleware(['web','auth', 'splade', 'verified'])->name('admin.')->group(f
     Route::get('admin/services/{model}/edit', [\TomatoPHP\TomatoCms\Http\Controllers\ServiceController::class, 'edit'])->name('services.edit');
     Route::post('admin/services/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\ServiceController::class, 'update'])->name('services.update');
     Route::delete('admin/services/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\ServiceController::class, 'destroy'])->name('services.destroy');
-});
-
-Route::middleware(['web','auth', 'splade', 'verified'])->name('admin.')->group(function () {
-    Route::get('admin/sections', [\TomatoPHP\TomatoCms\Http\Controllers\SectionController::class, 'index'])->name('sections.index');
-    Route::get('admin/sections/api', [\TomatoPHP\TomatoCms\Http\Controllers\SectionController::class, 'api'])->name('sections.api');
-    Route::get('admin/sections/create', [\TomatoPHP\TomatoCms\Http\Controllers\SectionController::class, 'create'])->name('sections.create');
-    Route::get('admin/sections/generate', [\TomatoPHP\TomatoCms\Http\Controllers\SectionController::class, 'generate'])->name('sections.generate');
-    Route::post('admin/sections', [\TomatoPHP\TomatoCms\Http\Controllers\SectionController::class, 'store'])->name('sections.store');
-    Route::get('admin/sections/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\SectionController::class, 'show'])->name('sections.show');
-    Route::get('admin/sections/{model}/edit', [\TomatoPHP\TomatoCms\Http\Controllers\SectionController::class, 'edit'])->name('sections.edit');
-    Route::post('admin/sections/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\SectionController::class, 'update'])->name('sections.update');
-    Route::delete('admin/sections/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\SectionController::class, 'destroy'])->name('sections.destroy');
 });
 
 Route::middleware(['web','auth', 'splade', 'verified'])->name('admin.')->group(function () {
@@ -111,8 +93,3 @@ Route::middleware(['web','auth', 'splade', 'verified'])->name('admin.')->group(f
     Route::post('admin/skills/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\SkillController::class, 'update'])->name('skills.update');
     Route::delete('admin/skills/{model}', [\TomatoPHP\TomatoCms\Http\Controllers\SkillController::class, 'destroy'])->name('skills.destroy');
 });
-
-Route::fallback(function ($slug){
-    $page= \TomatoPHP\TomatoCms\Models\Page::where('slug', $slug)->firstOrFail();
-    return view('tomato-cms::pages.html', compact('page'));
-})->middleware(['web','splade']);

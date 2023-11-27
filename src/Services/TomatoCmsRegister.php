@@ -16,16 +16,6 @@ class TomatoCmsRegister
         $this->pages[] = $page;
     }
 
-    public function registerSection(Section $section): void
-    {
-        $this->sections[] = $section;
-    }
-
-    public function getSections(): array
-    {
-        return $this->sections;
-    }
-
     public function getPages(): array
     {
         return $this->pages;
@@ -37,15 +27,6 @@ class TomatoCmsRegister
             $checkIfPageExists = \TomatoPHP\TomatoCms\Models\Page::where('slug', $page->slug)->first();
             if(!$checkIfPageExists){
                 \TomatoPHP\TomatoCms\Models\Page::create($page->toArray());
-            }
-        }
-
-        foreach ($this->sections as $section) {
-            $checkIfSectionExists = \TomatoPHP\TomatoCms\Models\Section::where('key', $section->key)->first();
-            if(!$checkIfSectionExists){
-                $form = Form::where('key', $section->form)->first();
-                $section->form_id($form->id);
-                \TomatoPHP\TomatoCms\Models\Section::create($section->toArray());
             }
         }
     }

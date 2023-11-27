@@ -9,8 +9,6 @@ use TomatoPHP\TomatoCms\Services\Section;
 
 /**
  * @method static registerPage(Page $page)
- * @method static registerSection(Section $section)
- * @method array getSections()
  * @method array getPages()
  * @method void build()
  */
