@@ -28,7 +28,7 @@ class BeJob implements ShouldQueue
      */
     public function handle(): void
     {
-        $be = new \TomatoPHP\TomatoCmspp\Services\Behance($this->username);
+        $be = new \TomatoPHP\TomatoCms\Services\Behance($this->username);
         $be->run();
     }
 }

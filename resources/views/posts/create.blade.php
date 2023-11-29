@@ -21,7 +21,6 @@
                     <x-splade-textarea label="{{__('Short description [AR]')}}" name="short_description[ar]" placeholder="Short description" autosize />
                     <x-splade-textarea label="{{__('Keywords [AR]')}}" name="keywords[ar]" placeholder="Keywords" autosize />
 
-
                     <x-splade-checkbox label="{{__('Activated')}}" name="activated" />
                     <x-splade-checkbox label="{{__('Trend')}}" name="trend" />
                 </div>
