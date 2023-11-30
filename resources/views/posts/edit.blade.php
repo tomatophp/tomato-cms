@@ -11,7 +11,7 @@
                 <x-splade-select label="{{__('Category')}}" multiple placeholder="Category" name="categories[]" remote-url="/admin/categories/api" relation remote-root="data" option-label="name[{{\Illuminate\Support\Str::of(app()->getLocale())->remove(' ')}}]" option-value="id" choices/>
                 <x-splade-select label="{{__('Type')}}" placeholder="Type" name="type" remote-url="/admin/types/api?for=posts" remote-root="data" option-label="name[{{\Illuminate\Support\Str::of(app()->getLocale())->remove(' ')}}]" option-value="key" choices/>
 
-                <x-splade-input class="w-full" label="{{__('Title [AR]')}}" @input="form.slug = form.title.ar.replaceAll(' ', '-')" name="title[ar]" type="text"  placeholder="Title" />
+                <x-splade-input class="w-full" label="{{__('Title [AR]')}}"  name="title[ar]" type="text"  placeholder="Title" />
                 <x-splade-input label="{{__('Slug')}}" name="slug" type="text"  placeholder="Slug" />
                 <x-tomato-markdown-editor name="body[ar]" label="{{__('Body [AR]')}}" />
                 <x-splade-textarea label="{{__('Short description [AR]')}}" name="short_description[ar]" placeholder="Short description" autosize />
@@ -27,7 +27,7 @@
                 <x-splade-select label="{{__('Category')}}" multiple placeholder="Category" relation name="categories[]" remote-url="/admin/categories/api" remote-root="data" option-label="name[{{\Illuminate\Support\Str::of(app()->getLocale())->remove(' ')}}]" option-value="id" choices/>
                 <x-splade-select label="{{__('Type')}}" placeholder="Type" name="type" remote-url="/admin/types/api?for=posts" remote-root="data" option-label="name[{{\Illuminate\Support\Str::of(app()->getLocale())->remove(' ')}}]" option-value="key" choices/>
 
-                <x-splade-input class="w-full" label="{{__('Title [EN]')}}" @input="form.slug = form.title.en.replaceAll(' ', '-')" name="title[en]" type="text"  placeholder="Title" />
+                <x-splade-input class="w-full" label="{{__('Title [EN]')}}"  name="title[en]" type="text"  placeholder="Title" />
                 <x-splade-input label="{{__('Slug')}}" name="slug" type="text"  placeholder="Slug" />
                 <x-tomato-markdown-editor name="body[en]" label="{{__('Body [EN]')}}"/>
                 <x-splade-textarea label="{{__('Short description [EN]')}}" name="short_description[en]" placeholder="Short description" autosize />

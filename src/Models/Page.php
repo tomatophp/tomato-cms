@@ -31,11 +31,11 @@ class Page extends Model implements HasMedia
         'lock' => 'boolean',
     ];
 
-    public $translatable = ['title', 'short_description', 'body'];
+    public $translatable = ['title', 'short_description', 'body','keywords'];
     /**
      * @var array
      */
-    protected $fillable = ['lock','color', 'title', 'short_description', 'slug', 'body', 'is_active', 'has_view', 'view', 'created_at', 'updated_at'];
+    protected $fillable = ['lock','color', 'title', 'short_description','keywords', 'slug', 'body', 'is_active', 'has_view', 'view', 'created_at', 'updated_at'];
 
 
     public function pageMetas()

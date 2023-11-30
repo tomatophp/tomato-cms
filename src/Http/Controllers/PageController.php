@@ -77,6 +77,7 @@ class PageController extends Controller
                 'title' => 'required|array',
                 'title*' => 'required|string|max:255',
                 'short_description' => 'nullable|array',
+                'keywords' => 'nullable|array',
                 'slug' => 'required|max:255|string',
                 'body' => 'nullable|array',
                 'is_active' => 'nullable',
@@ -134,6 +135,9 @@ class PageController extends Controller
      */
     public function edit(\TomatoPHP\TomatoCms\Models\Page $model): View
     {
+        $model->short_description = empty($model->short_description) ? ['ar'=>'', 'en'=>''] : $model->short_description;
+        $model->keywords = empty($model->keywords) ? ['ar'=>'', 'en'=>''] : $model->keywords;
+        $model->body = empty($model->body) ? ['ar'=>'', 'en'=>''] : $model->body;
         return Tomato::get(
             model: $model,
             view: 'tomato-cms::pages.edit',
@@ -160,6 +164,7 @@ class PageController extends Controller
                 'title' => 'sometimes|array',
                 'title*' => 'sometimes|string|max:255',
                 'short_description' => 'nullable|array',
+                'keywords' => 'nullable|array',
                 'slug' => 'sometimes|max:255|string',
                 'body' => 'nullable|array',
                 'is_active' => 'nullable',
