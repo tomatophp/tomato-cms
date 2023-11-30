@@ -21,6 +21,7 @@ class MarkdownEditor extends Component
         public string $name = '',
         public string $vModel = '',
         public string $type = 'text',
+        public bool $preview = false,
         public string $label = '',
         public string $validationKey = '',
         public bool $showErrors = true,
