@@ -38,7 +38,7 @@
         "php": "^8.1|^8.2",
         "tomatophp/console-helpers": "^1.1",
         "tomatophp/tomato-admin": "^1.1",
-        "tomatophp/tomato-category": "^1.1",
+        "tomatophp/tomato-forms": "^1.1",
         "tomatophp/tomato-category": "^1.1",
         "laravel/dusk": "^7.8"
     }

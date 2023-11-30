@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Translatable\HasTranslations;
+use TomatoPHP\TomatoForms\Models\Form;
 
 /**
  * @property integer $id
@@ -15,14 +16,15 @@ use Spatie\Translatable\HasTranslations;
  * @property float $rate
  * @property string $short_description
  * @property string $keywords
- * @property string $features
- * @property string $process
- * @property string $body
+ * @property string $form_id
+ * @property string $page_id
  * @property boolean $activated
  * @property boolean $trend
  * @property float $views
  * @property string $created_at
  * @property string $updated_at
+ * @property Page[] $page
+ * @property Form[] $form
  * @property Contact[] $contacts
  * @property Plan[] $plans
  * @property Portfolio[] $portfolios
@@ -43,14 +45,12 @@ class Service extends Model implements HasMedia
     /**
      * @var array
      */
-    protected $fillable = ['name', 'slug', 'sku', 'rate', 'short_description', 'keywords', 'features', 'process', 'body', 'activated', 'trend', 'views', 'created_at', 'updated_at'];
+    protected $fillable = ['name', 'slug', 'sku', 'rate', 'short_description', 'keywords','page_id', 'form_id', 'activated', 'trend', 'views', 'created_at', 'updated_at'];
 
     protected $casts = [
         'activated' => 'boolean',
         'trend' => 'boolean',
         'views' => 'float',
-        'features' => 'array',
-        'process' => 'array',
     ];
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -58,6 +58,14 @@ class Service extends Model implements HasMedia
     public function contacts()
     {
         return $this->hasMany('Modules\Services\Entities\Contact');
+    }
+
+    public function form(){
+        return $this->belongsTo(Form::class);
+    }
+
+    public function page(){
+        return $this->belongsTo(Page::class);
     }
 
     /**
