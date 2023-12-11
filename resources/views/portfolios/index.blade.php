@@ -6,7 +6,7 @@
         <x-tomato-admin-button :href="route('admin.portfolios.create')">
             {{trans('tomato-admin::global.crud.create-new')}} {{__('Portfolio')}}
         </x-tomato-admin-button>
-        <x-tomato-admin-button method="POST" href="/admin/portfolios/scan">
+        <x-tomato-admin-button confirm method="POST" :href="route('admin.portfolios.scan')">
             {{__('Import From Behance')}}
         </x-tomato-admin-button>
     </x-slot:buttons>
