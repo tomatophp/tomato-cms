@@ -14,7 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::table('skills', function (Blueprint $table) {
-            $table->text('url')->nullable();
+            if(!Schema::hasColumn('skills', 'url')){
+                $table->text('url')->nullable();
+            }
         });
     }
 
