@@ -27,6 +27,9 @@
                             <x-tomato-admin-button type="icon" title="{{__('Page Builder')}}" :href="route('admin.pages.builder', $item->id)">
                                 <x-heroicon-s-building-library class="h-6 w-6"/>
                             </x-tomato-admin-button>
+                            <x-tomato-admin-button danger confirm method="POST" type="icon" title="{{__('Clear Builder')}}" href="{{route('admin.pages.clear', $item->id)}}">
+                                <x-heroicon-s-archive-box-x-mark class="h-6 w-6"/>
+                            </x-tomato-admin-button>
                         @endif
                         <x-tomato-admin-button success type="icon" title="{{trans('tomato-admin::global.crud.view')}}" modal :href="route('admin.pages.show', $item->id)">
                             <x-heroicon-s-eye class="h-6 w-6"/>
