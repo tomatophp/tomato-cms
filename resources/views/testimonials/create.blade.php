@@ -17,8 +17,10 @@
 
         <x-splade-input label="{{__('Rate')}}" type='number' name="rate" placeholder="Rate" />
 
-        <x-tomato-admin-submit-buttons table="testimonials" save cancel />
-
+        <div class="flex justify-start gap-2 pt-3">
+            <x-tomato-admin-submit label="{{__('Save')}}" :spinner="true" />
+            <x-tomato-admin-button secondary :href="route('admin.testimonials.index')" label="{{__('Cancel')}}"/>
+        </div>
     </x-splade-form>
 
 </x-tomato-admin-container>

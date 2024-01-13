@@ -40,7 +40,7 @@
         <x-tomato-admin-color :label="__('Color')" :placeholder="__('Color')" type='number' name="color" />
 
         <div class="flex justify-start gap-2 pt-3">
-            <x-tomato-admin-submit  label="{{__('Save')}}" :spinner="true" />
+            <x-tomato-admin-submit label="{{__('Save')}}" :spinner="true" />
             <x-tomato-admin-button secondary :href="route('admin.pages.index')" label="{{__('Cancel')}}"/>
         </div>
     </x-splade-form>

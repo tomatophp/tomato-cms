@@ -9,6 +9,15 @@
         <x-splade-input label="{{__('By')}}" name="by" type="text"  placeholder="By" />
         <x-splade-checkbox label="{{__('Activated')}}" name="activated" label="Activated" />
 
-        <x-tomato-admin-submit-buttons table="photos" :model="$model" save delete cancel />
+        <div class="flex justify-start gap-2 pt-3">
+            <x-tomato-admin-submit label="{{__('Save')}}" :spinner="true" />
+            <x-tomato-admin-button danger :href="route('admin.photos.destroy', $model->id)"
+                                   confirm="{{trans('tomato-admin::global.crud.delete-confirm')}}"
+                                   confirm-text="{{trans('tomato-admin::global.crud.delete-confirm-text')}}"
+                                   confirm-button="{{trans('tomato-admin::global.crud.delete-confirm-button')}}"
+                                   cancel-button="{{trans('tomato-admin::global.crud.delete-confirm-cancel-button')}}"
+                                   method="delete"  label="{{__('Delete')}}" />
+            <x-tomato-admin-button secondary :href="route('admin.photos.index')" label="{{__('Cancel')}}"/>
+        </div>
     </x-splade-form>
 </x-tomato-admin-container>

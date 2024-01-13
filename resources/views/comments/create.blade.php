@@ -6,9 +6,11 @@
         <x-splade-select label="{{__('parent')}}" placeholder="Parent" name="parent_id" remote-url="/admin/comments/api" remote-root="data" option-label="name" option-value="id" choices/>
 
         <x-splade-textarea label="{{__('Comment')}}" name="comment" placeholder="Comment" autosize />
-        <x-splade-checkbox label="{{__('Active)}}" name="active" label="Active" />
+        <x-splade-checkbox label="{{__('Active')}}" name="active" label="Active" />
 
-        <x-tomato-admin-submit-buttons table="comments" save cancel />
-
+        <div class="flex justify-start gap-2 pt-3">
+            <x-tomato-admin-submit label="{{__('Save')}}" :spinner="true" />
+            <x-tomato-admin-button secondary :href="route('admin.comments.index')" label="{{__('Cancel')}}"/>
+        </div>
     </x-splade-form>
 </x-tomato-admin-container>

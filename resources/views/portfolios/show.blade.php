@@ -9,5 +9,14 @@
         <x-tomato-admin-row type="text" :label="__('Views')" :value="$model->views" />
     </div>
 
-    <x-tomato-admin-submit-buttons table="portfolios" :model="$model" edit delete cancel />
+    <div class="flex justify-start gap-2 pt-3">
+        <x-tomato-admin-button warning label="{{__('Edit')}}" :href="route('admin.portfolios.edit', $model->id)" modal/>
+        <x-tomato-admin-button danger :href="route('admin.portfolios.destroy', $model->id)"
+                                confirm="{{trans('tomato-admin::global.crud.delete-confirm')}}"
+                                confirm-text="{{trans('tomato-admin::global.crud.delete-confirm-text')}}"
+                                confirm-button="{{trans('tomato-admin::global.crud.delete-confirm-button')}}"
+                                cancel-button="{{trans('tomato-admin::global.crud.delete-confirm-cancel-button')}}"
+                                method="delete"  label="{{__('Delete')}}" />
+        <x-tomato-admin-button secondary :href="route('admin.portfolios.index')" label="{{__('Cancel')}}"/>
+    </div>
 </x-tomato-admin-container>

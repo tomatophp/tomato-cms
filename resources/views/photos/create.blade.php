@@ -9,6 +9,9 @@
         <x-splade-input label="{{__('By')}}" name="by" type="text"  placeholder="By" />
         <x-splade-checkbox label="{{__('Activated')}}" name="activated" label="Activated" />
 
-        <x-tomato-admin-submit-buttons table="photos" save cancel />
+        <div class="flex justify-start gap-2 pt-3">
+            <x-tomato-admin-submit label="{{__('Save')}}" :spinner="true" />
+            <x-tomato-admin-button secondary :href="route('admin.photos.index')" label="{{__('Cancel')}}"/>
+        </div>
     </x-splade-form>
 </x-tomato-admin-container>

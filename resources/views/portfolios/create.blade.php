@@ -21,6 +21,9 @@
 
         <x-splade-checkbox label="{{__('Activated')}}" name="activated" />
 
-        <x-tomato-admin-submit-buttons table="portfolios" save cancel />
+        <div class="flex justify-start gap-2 pt-3">
+            <x-tomato-admin-submit label="{{__('Save')}}" :spinner="true" />
+            <x-tomato-admin-button secondary :href="route('admin.portfolios.index')" label="{{__('Cancel')}}"/>
+        </div>
     </x-splade-form>
 </x-tomato-admin-container>

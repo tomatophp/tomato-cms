@@ -10,9 +10,18 @@
         <x-splade-input label="{{__('Description [AR]')}}" name="description[ar]" type="text"  placeholder="{{__('Description [AR]')}}" />
 
         <x-splade-input label="{{__('Exp')}}" type='number' name="exp" placeholder="{{__('Exp')}}" />
-        <x-tomato-admin-icon label="{{__('Icon')}}" name="icon" placeholder="{{__('Icon')}}" />
+        <x-splade-input label="{{__('Icon')}}" name="icon"  placeholder="{{__('Icon')}}" />
         <x-splade-textarea label="{{__('URL')}}" name="url" placeholder="{{__('URL')}}" autosize />
 
-        <x-tomato-admin-submit-buttons table="skills" :model="$model" save cancel delete />
+        <div class="flex justify-start gap-2 pt-3">
+            <x-tomato-admin-submit label="{{__('Save')}}" :spinner="true" />
+            <x-tomato-admin-button danger :href="route('admin.skills.destroy', $model->id)"
+                                   confirm="{{trans('tomato-admin::global.crud.delete-confirm')}}"
+                                   confirm-text="{{trans('tomato-admin::global.crud.delete-confirm-text')}}"
+                                   confirm-button="{{trans('tomato-admin::global.crud.delete-confirm-button')}}"
+                                   cancel-button="{{trans('tomato-admin::global.crud.delete-confirm-cancel-button')}}"
+                                   method="delete"  label="{{__('Delete')}}" />
+            <x-tomato-admin-button secondary :href="route('admin.skills.index')" label="{{__('Cancel')}}"/>
+        </div>
     </x-splade-form>
 </x-tomato-admin-container>

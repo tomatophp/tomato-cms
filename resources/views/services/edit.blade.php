@@ -36,6 +36,15 @@
         <x-splade-checkbox label="{{__('Activated')}}" name="activated" label="Activated" />
         <x-splade-checkbox label="{{__('Trend')}}" name="trend" label="Trend" />
 
-        <x-tomato-admin-submit-buttons table="services" :model="$model" save delete cancel />
+        <div class="flex justify-start gap-2 pt-3">
+            <x-tomato-admin-submit label="{{__('Save')}}" :spinner="true" />
+            <x-tomato-admin-button danger :href="route('admin.services.destroy', $model->id)"
+                                   confirm="{{trans('tomato-admin::global.crud.delete-confirm')}}"
+                                   confirm-text="{{trans('tomato-admin::global.crud.delete-confirm-text')}}"
+                                   confirm-button="{{trans('tomato-admin::global.crud.delete-confirm-button')}}"
+                                   cancel-button="{{trans('tomato-admin::global.crud.delete-confirm-cancel-button')}}"
+                                   method="delete"  label="{{__('Delete')}}" />
+            <x-tomato-admin-button secondary :href="route('admin.services.index')" label="{{__('Cancel')}}"/>
+        </div>
     </x-splade-form>
 </x-tomato-admin-container>

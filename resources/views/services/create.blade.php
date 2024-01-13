@@ -36,6 +36,9 @@
         <x-splade-checkbox label="{{__('Activated')}}" name="activated" label="Activated" />
         <x-splade-checkbox label="{{__('Trend')}}" name="trend" label="Trend" />
 
-        <x-tomato-admin-submit-buttons table="services" save cancel />
+        <div class="flex justify-start gap-2 pt-3">
+            <x-tomato-admin-submit label="{{__('Save')}}" :spinner="true" />
+            <x-tomato-admin-button secondary :href="route('admin.services.index')" label="{{__('Cancel')}}"/>
+        </div>
     </x-splade-form>
 </x-tomato-admin-container>
