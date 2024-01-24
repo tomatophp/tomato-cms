@@ -139,7 +139,7 @@ class ServiceController extends Controller
             request: $request,
             model: $model,
             validation: [
-                'icon' => 'sometimes|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'icon' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 'name' => 'sometimes|array',
                 'name*' => 'sometimes|max:255|string',
                 'slug' => 'sometimes|max:255|string',

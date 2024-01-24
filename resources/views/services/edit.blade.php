@@ -23,15 +23,13 @@
         />
 
         <x-splade-file preview filepond class="col-span-2" name="icon" label="{{__('Icon')}}" />
-        <x-splade-input label="{{__('Name [EN]')}}" @input="form.slug = form.name.en.replaceAll(' ', '-')" name="name[en]" type="text"  placeholder="Name" />
-        <x-splade-input label="{{__('Name [AR]')}}" @input="form.slug = form.name.ar.replaceAll(' ', '-')" name="name[ar]" type="text"  placeholder="Name" />
+        <x-tomato-translation label="{{__('Name')}}" @input="form.slug = form.name.en.replaceAll(' ', '-')" name="name" :placeholder="__('Name')" />
         <x-splade-input label="{{__('Slug')}}" name="slug" type="text"  placeholder="Slug" />
         <x-splade-input label="{{__('Sku')}}" name="sku" type="text"  placeholder="Sku" />
         <x-splade-input label="{{__('Rate')}}" type='number' name="rate" placeholder="Rate" />
-        <x-splade-textarea class="col-span-2" label="{{__('Short description [EN]')}}" name="short_description[en]" type="text"  placeholder="Short description" />
-        <x-splade-textarea class="col-span-2" label="{{__('Short description [AR]')}}" name="short_description[ar]" type="text"  placeholder="Short description" />
-        <x-splade-textarea class="col-span-2" label="{{__('Keywords [EN]')}}" name="keywords[en]" type="text"  placeholder="Keywords" />
-        <x-splade-textarea class="col-span-2" label="{{__('Keywords [AR]')}}" name="keywords[ar]" type="text"  placeholder="Keywords" />
+
+        <x-tomato-translation textarea label="{{__('Description')}}" name="short_description" :placeholder="__('Description')" />
+        <x-tomato-translation textarea label="{{__('Keywords')}}" name="keywords" :placeholder="__('Keywords')" />
 
         <x-splade-checkbox label="{{__('Activated')}}" name="activated" label="Activated" />
         <x-splade-checkbox label="{{__('Trend')}}" name="trend" label="Trend" />

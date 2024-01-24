@@ -5,18 +5,14 @@
         <x-splade-file filepond preview name="cover" :label="__('Cover Image')" />
         <x-splade-file filepond preview multiple name="gallery" :label="__('Gallery Images')" />
 
-        <x-splade-input :label="__('Title [EN]')" @input="form.slug = form.title.en.replace(' ', '-').toLowerCase()" :placeholder="__('Title [EN]')" name="title.en" type='text' />
-        <x-splade-input :label="__('Title [AR]')" @input="form.slug = form.title.ar.replace(' ', '-').toLowerCase()" :placeholder="__('Title [AR]')" name="title.ar" type='text' />
+        <x-tomato-translation :label="__('Title')" name="title" :placeholder="__('Title')" />
         <x-splade-input :label="__('Slug')" name="slug" type="text"  :placeholder="__('Slug')" />
-        <x-tomato-markdown-editor  name="body[en]"  :label="__('Body [EN]')"/>
-        <x-tomato-markdown-editor  name="body[ar]" :label="__('Body [AR]')"/>
 
-        <x-splade-textarea :label="__('Short Description')" name="short_description.en" :placeholder="__('Short Description [EN]')" />
-        <x-splade-textarea :label="__('Short Description')" name="short_description.ar" :placeholder="__('Short Description [AR]')" />
+        <x-tomato-translation type="markdown" :label="__('Body')" name="body" :placeholder="__('Body')" />
 
-        <x-splade-textarea :label="__('Keywords')" name="keywords.en"  :placeholder="__('Keywords [EN]')" />
-        <x-splade-textarea :label="__('Keywords')" name="keywords.ar"  :placeholder="__('Keywords [AR]')" />
+        <x-tomato-translation textarea :label="__('Short Description')" name="short_description" :placeholder="__('Short Description')" />
 
+        <x-tomato-translation textarea :label="__('Keywords')" name="keywords" :placeholder="__('Keywords')" />
 
         <x-splade-checkbox :label="__('Is active')" name="is_active" label="Is active" />
 
