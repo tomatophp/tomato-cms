@@ -21,14 +21,15 @@
 
     <x-tomato-admin-submit-buttons table="posts" :model="$model" edit delete cancel />
 
-
-    <x-tomato-admin-relations-group :relations="['comments' => __('Comments')]">
-        <x-tomato-admin-relations
-            :table="\TomatoPHP\TomatoCms\Tables\CommentTable::class"
-            :model="$model"
-            name="comments"
-            view="tomato-cms::comments.index"
-        />
-    </x-tomato-admin-relations-group>
+    @if (config("tomato-cms.features.comments"))
+        <x-tomato-admin-relations-group :relations="['comments' => __('Comments')]">
+            <x-tomato-admin-relations
+                :table="\TomatoPHP\TomatoCms\Tables\CommentTable::class"
+                :model="$model"
+                name="comments"
+                view="tomato-cms::comments.index"
+            />
+        </x-tomato-admin-relations-group>
+    @endif
 
 </x-tomato-admin-container>

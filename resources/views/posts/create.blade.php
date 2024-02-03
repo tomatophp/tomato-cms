@@ -4,8 +4,13 @@
     <x-splade-form :default="['type'=> 'post', 'categories' => [], 'body' => ['ar' => '', 'en'=> '']]" action="{{route('admin.posts.store')}}" method="post" class="flex flex-col gap-4">
 
         <x-splade-file filepond preview name="feature" label="{{__('Feature Image')}}" />
-        <x-splade-select label="{{__('Category')}}" multiple placeholder="Category" relation name="categories[]" :remote-url="route('admin.categories.api').'?for=content'" remote-root="data" option-label="name[{{\Illuminate\Support\Str::of(app()->getLocale())->remove(' ')}}]" option-value="id" choices/>
-        <x-splade-select label="{{__('Type')}}" placeholder="Type" name="type" :remote-url="route('admin.types.api').'?for=content'" remote-root="data" option-label="name[{{\Illuminate\Support\Str::of(app()->getLocale())->remove(' ')}}]" option-value="key" choices/>
+        @if (config("tomato-category.features.category"))
+            <x-splade-select label="{{__('Category')}}" multiple placeholder="Category" relation name="categories[]" :remote-url="route('admin.categories.api').'?for=content'" remote-root="data" option-label="name[{{\Illuminate\Support\Str::of(app()->getLocale())->remove(' ')}}]" option-value="id" choices/>
+        @endif
+
+        @if (config("tomato-category.features.types"))
+            <x-splade-select label="{{__('Type')}}" placeholder="Type" name="type" :remote-url="route('admin.types.api').'?for=content'" remote-root="data" option-label="name[{{\Illuminate\Support\Str::of(app()->getLocale())->remove(' ')}}]" option-value="key" choices/>
+        @endif
 
         <x-tomato-translation  label="{{__('Title')}}" @input="form.slug = form.title.en.replaceAll(' ', '-')" name="title" :placeholder="__('Title')" />
 

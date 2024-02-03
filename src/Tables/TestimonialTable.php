@@ -48,7 +48,7 @@ class TestimonialTable extends AbstractTable
     public function configure(SpladeTable $table)
     {
         $table
-            ->withGlobalSearch(label: trans('tomato-admin::global.search'),columns: ['id','service.name','name',])
+            ->withGlobalSearch(label: trans('tomato-admin::global.search'), columns: ['id', 'service.name', 'name'])
             ->bulkAction(
                 label: trans('tomato-admin::global.crud.delete'),
                 each: fn (\Modules\Cms\Entities\Testimonial $model) => $model->delete(),
@@ -60,21 +60,34 @@ class TestimonialTable extends AbstractTable
             ->column(
                 key: 'id',
                 label: __('Id'),
-                sortable: true)
-            ->column(
-                key: 'service.name',
-                label: __('Service'),
-                sortable: true,
-                searchable: true)
+                sortable: true
+            );
+
+        if (config("tomato-cms.features.services")) {
+            $table
+                ->column(
+                    key: 'service.name',
+                    label: __('Service'),
+                    sortable: true,
+                    searchable: true
+                );
+        }
+
+        $table
             ->column(
                 key: 'name',
                 label: __('Name'),
-                sortable: true)
+                sortable: true
+            )
             ->column(
                 key: 'rate',
                 label: __('Rate'),
-                sortable: true)
-            ->column(key: 'actions',label: trans('tomato-admin::global.crud.actions'))
+                sortable: true
+            )
+            ->column(
+                key: 'actions',
+                label: trans('tomato-admin::global.crud.actions')
+            )
             ->paginate(15);
     }
 }
