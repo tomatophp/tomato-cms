@@ -18,96 +18,115 @@ class TomatoCmsServiceProvider extends ServiceProvider
     {
         //Register generate command
         $this->commands([
-           \TomatoPHP\TomatoCms\Console\TomatoCmsInstall::class
+            \TomatoPHP\TomatoCms\Console\TomatoCmsInstall::class
         ]);
 
         //Register Config file
-        $this->mergeConfigFrom(__DIR__.'/../config/tomato-cms.php', 'tomato-cms');
+        $this->mergeConfigFrom(__DIR__ . '/../config/tomato-cms.php', 'tomato-cms');
 
         //Publish Config
         $this->publishes([
-           __DIR__.'/../config/tomato-cms.php' => config_path('tomato-cms.php'),
+            __DIR__ . '/../config/tomato-cms.php' => config_path('tomato-cms.php'),
         ], 'tomato-cms-config');
 
         //Register Migrations
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
         //Publish Migrations
         $this->publishes([
-           __DIR__.'/../database/migrations' => database_path('migrations'),
+            __DIR__ . '/../database/migrations' => database_path('migrations'),
         ], 'tomato-cms-migrations');
         //Register views
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'tomato-cms');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'tomato-cms');
 
         //Publish Views
         $this->publishes([
-           __DIR__.'/../resources/views' => resource_path('views/vendor/tomato-cms'),
+            __DIR__ . '/../resources/views' => resource_path('views/vendor/tomato-cms'),
         ], 'tomato-cms-views');
 
         //Register Langs
-        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'tomato-cms');
+        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'tomato-cms');
 
         //Publish Lang
         $this->publishes([
-           __DIR__.'/../resources/lang' => app_path('lang/vendor/tomato-cms'),
+            __DIR__ . '/../resources/lang' => app_path('lang/vendor/tomato-cms'),
         ], 'tomato-cms-lang');
 
         //Register Routes
-        $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
-
+        $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
     }
 
     public function boot(): void
     {
         //you boot methods here
 
-        TomatoMenu::register([
-            Menu::make()
+        $menus = [];
+
+        if (config("tomato-cms.features.posts")) {
+            $menus[] = Menu::make()
                 ->group(__("CMS"))
                 ->label(__("Posts"))
                 ->icon("bx bx-paperclip")
-                ->route("admin.posts.index"),
-            Menu::make()
+                ->route("admin.posts.index");
+        }
+
+        if (config("tomato-cms.features.pages")) {
+            $menus[] = Menu::make()
                 ->group(__('CMS'))
                 ->label(__('Pages'))
                 ->icon('bx bx-file')
-                ->route('admin.pages.index'),
-            Menu::make()
-                ->group(__("CMS"))
-                ->label(__("Photos"))
-                ->icon("bx bxs-image")
-                ->route("admin.photos.index"),
-            Menu::make()
+                ->route('admin.pages.index');
+        }
+
+        if (config("tomato-cms.features.photos")) {
+            $menus[] = Menu::make()
+                ->group(__('CMS'))
+                ->label(__('Photos'))
+                ->icon('bx bxs-image')
+                ->route('admin.photos.index');
+        }
+
+        if (config("tomato-cms.features.services")) {
+            $menus[] = Menu::make()
                 ->group(__("CMS"))
                 ->label(__("Services"))
                 ->icon("bx bxl-sketch")
-                ->route("admin.services.index"),
-            Menu::make()
+                ->route("admin.services.index");
+        }
+
+        if (config("tomato-cms.features.portfolios")) {
+            $menus[] = Menu::make()
                 ->group(__("CMS"))
                 ->label(__("Portfolios"))
                 ->icon("bx bxs-hard-hat")
-                ->route("admin.portfolios.index"),
-            Menu::make()
+                ->route("admin.portfolios.index");
+        }
+
+        if (config("tomato-cms.features.skills")) {
+            $menus[] = Menu::make()
                 ->group(__("CMS"))
                 ->label(__("Skills"))
                 ->icon("bx bx-dumbbell")
-                ->route("admin.skills.index"),
-            Menu::make()
+                ->route("admin.skills.index");
+        }
+
+        if (config("tomato-cms.features.testimonials")) {
+            $menus[] = Menu::make()
                 ->group(__("CMS"))
                 ->label(__("Testimonials"))
                 ->icon("bx bxs-comment-check")
-                ->route("admin.testimonials.index"),
-        ]);
+                ->route("admin.testimonials.index");
+        }
+
+        TomatoMenu::register($menus);
 
         $this->loadViewComponentsAs('tomato', [
             MarkdownEditor::class,
             MarkdownViewer::class
         ]);
 
-
         app()->bind('tomato-cms', function () {
             return new TomatoCmsRegister();
         });
-
     }
 }
