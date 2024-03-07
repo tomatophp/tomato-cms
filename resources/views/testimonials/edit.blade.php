@@ -14,7 +14,7 @@
         <x-tomato-translation textarea textarea class="col-span-2" label="{{__('Comment')}}" name="comment" placeholder="{{__('Comment')}}" autosize />
 
 
-        <x-splade-input label="{{__('Rate')}}" type='number' name="rate" placeholder="Rate" />
+        <x-splade-input label="{{__('Rate')}}" type='number' name="rate" placeholder="{{__('Rate')}}" />
 
         <x-tomato-admin-submit-buttons table="testimonials" :model="$model" save cancel delete />
 

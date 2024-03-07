@@ -11,7 +11,7 @@
 
           <x-tomato-admin-row :label="__('Has view')" :value="$model->has_view" type="bool" />
 
-          <x-tomato-admin-row :label="__('View')" :value="$model->view" type="string" />
+          <x-tomato-admin-row :label="__('Views')" :value="$model->view" type="string" />
 
         <x-tomato-admin-row :label="__('Color')" :value="$model->color" type="color" />
 

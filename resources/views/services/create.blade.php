@@ -25,15 +25,15 @@
         <x-splade-file preview filepond class="col-span-2" name="icon" label="{{__('Icon')}}" />
 
         <x-tomato-translation label="{{__('Name')}}" @input="form.slug = form.name.en.replaceAll(' ', '-')" name="name" :placeholder="__('Name')" />
-        <x-splade-input label="{{__('Slug')}}" name="slug" type="text"  placeholder="Slug" />
-        <x-splade-input label="{{__('Sku')}}" name="sku" type="text"  placeholder="Sku" />
-        <x-splade-input label="{{__('Rate')}}" type='number' name="rate" placeholder="Rate" />
+        <x-splade-input label="{{__('Slug')}}" name="slug" type="text"  placeholder="{{__('Slug')}}" />
+        <x-splade-input label="{{__('Sku')}}" name="sku" type="text"  placeholder="{{__('Sku')}}" />
+        <x-splade-input label="{{__('Rate')}}" type='number' name="rate" placeholder="{{__('Rate')}}" />
 
         <x-tomato-translation textarea label="{{__('Description')}}" name="short_description" :placeholder="__('Description')" />
         <x-tomato-translation textarea label="{{__('Keywords')}}" name="keywords" :placeholder="__('Keywords')" />
 
-        <x-splade-checkbox label="{{__('Activated')}}" name="activated" label="Activated" />
-        <x-splade-checkbox label="{{__('Trend')}}" name="trend" label="Trend" />
+        <x-splade-checkbox label="{{__('Activated')}}" name="activated" />
+        <x-splade-checkbox label="{{__('Trend')}}" name="trend" />
 
         <x-tomato-admin-submit-buttons table="services" save cancel />
     </x-splade-form>

@@ -80,7 +80,7 @@ class PostController extends Controller
                 'activated' => 'required',
                 'trend' => 'required'
             ],
-            message: __('Post updated successfully'),
+            message: __('Post created successfully'),
             redirect: 'admin.posts.index',
             hasMedia: true,
             collection: [

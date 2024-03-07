@@ -14,9 +14,9 @@
 
         <x-tomato-translation textarea :label="__('Keywords')" name="keywords" :placeholder="__('Keywords')" />
 
-        <x-splade-checkbox :label="__('Is active')" name="is_active" label="Is active" />
+        <x-splade-checkbox :label="__('Is active')" name="is_active" />
 
-        <x-splade-checkbox :label="__('Has view')" name="has_view" label="Has view" />
+        <x-splade-checkbox :label="__('Has view')" name="has_view" />
         <x-splade-input v-if="form.has_view" :label="__('View')" name="view" type="text"  :placeholder="__('View')" />
         <x-tomato-admin-color :label="__('Color')" :placeholder="__('Color')" type='number' name="color" />
 

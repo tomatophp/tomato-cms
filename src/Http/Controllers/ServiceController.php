@@ -81,7 +81,7 @@ class ServiceController extends Controller
                 'activated' => 'required',
                 'trend' => 'required',
             ],
-            message: __('Service updated successfully'),
+            message: __('Service created successfully'),
             redirect: 'admin.services.index',
             hasMedia: true,
             collection: [

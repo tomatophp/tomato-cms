@@ -72,7 +72,7 @@ class SkillController extends Controller
                 'icon' => 'nullable|max:65535',
                 'url' => 'nullable|max:65535'
             ],
-            message: __('Skill updated successfully'),
+            message: __('Skill created successfully'),
             redirect: 'admin.skills.index',
             hasMedia: true,
             collection: [
