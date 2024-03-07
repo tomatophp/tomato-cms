@@ -78,7 +78,7 @@ class PortfolioController extends Controller
                 'body*' => 'nullable',
                 'activated' => 'required',
             ],
-            message: __('Portfolio updated successfully'),
+            message: __('Portfolio created successfully'),
             redirect: 'admin.portfolios.index',
             hasMedia: true,
             collection: [

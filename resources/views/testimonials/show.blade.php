@@ -1,4 +1,4 @@
-<x-tomato-admin-container label="{{trans('tomato-admin::global.crud.view')}} {{ __('Service') }} #{{$model->id}}">
+<x-tomato-admin-container label="{{trans('tomato-admin::global.crud.view')}} {{ __('Testimonial') }} #{{$model->id}}">
     <div class="grid grid-cols-2 gap-4">
         @if (config("tomato-cms.features.services"))
         <x-tomato-admin-row type="text" :label="__('Service')" :value="$model->service->name" />

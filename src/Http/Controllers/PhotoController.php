@@ -72,7 +72,7 @@ class PhotoController extends Controller
                 'by' => 'nullable|max:255|string',
                 'activated' => 'required'
             ],
-            message: __('Photo updated successfully'),
+            message: __('Photo created successfully'),
             redirect: 'admin.photos.index',
             hasMedia: true,
             collection: [

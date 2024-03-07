@@ -75,7 +75,7 @@ class TestimonialController extends Controller
                 'comment*' => 'required|max:65535',
                 'rate' => 'required'
             ],
-            message: __('Testimonial updated successfully'),
+            message: __('Testimonial created successfully'),
             redirect: 'admin.testimonials.index',
         );
 

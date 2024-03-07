@@ -6,7 +6,7 @@
             <x-tomato-markdown-viewer :content="$model->body" />
         </div>
         <div class="col-span-2">
-            <x-tomato-admin-row type="text" :label="__('Short description')" :value="$model->short_description" />
+            <x-tomato-admin-row type="text" :label="__('Short Description')" :value="$model->short_description" />
         </div>
         <div class="col-span-2">
             <x-tomato-admin-row type="text" :label="__('Keywords')" :value="$model->keywords" />

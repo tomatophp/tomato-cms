@@ -84,7 +84,7 @@ class PageController extends Controller
                 'has_view' => 'nullable',
                 'view' => 'nullable|max:255|string'
             ],
-            message: __('Page updated successfully'),
+            message: __('Page created successfully'),
             redirect: 'admin.pages.index',
             hasMedia: true,
             collection: [
