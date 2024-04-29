@@ -120,11 +120,6 @@ class TomatoCmsServiceProvider extends ServiceProvider
 
         TomatoMenu::register($menus);
 
-        $this->loadViewComponentsAs('tomato', [
-            MarkdownEditor::class,
-            MarkdownViewer::class
-        ]);
-
         app()->bind('tomato-cms', function () {
             return new TomatoCmsRegister();
         });

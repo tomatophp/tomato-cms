@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use ProtoneMedia\Splade\AbstractTable;
 use ProtoneMedia\Splade\Facades\Toast;
 use ProtoneMedia\Splade\SpladeTable;
+use TomatoPHP\TomatoCategory\Models\Type;
 
 class PostTable extends AbstractTable
 {
@@ -55,11 +56,15 @@ class PostTable extends AbstractTable
                 after: fn () => Toast::danger(__('Post Has Been Deleted'))->autoDismiss(2),
                 confirm: true
             )
-            ->selectFilter('type', [
-                'post' => __('Post'),
-                'open-source' => __('Open Source'),
-                'videos' => __('Videos'),
-            ], __('Type'))
+            ->selectFilter(
+                'type',
+                Type::query()
+                    ->where('for', 'posts')
+                    ->get()
+                    ->pluck('name', 'key')
+                    ->toArray() ,
+                __('Type')
+            )
             ->export()
             ->defaultSort('id')
             ->column(

@@ -9,7 +9,7 @@ return [
         "posts" => true,
         "pages" => true,
         "photos" => true,
-        "services" => false,
+        "services" => true,
         "portfolios" => true,
         "skills" => true,
         "testimonials" => true,
