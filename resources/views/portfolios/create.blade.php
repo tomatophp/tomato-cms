@@ -7,7 +7,7 @@
         <x-tomato-translation  class="col-span-2" label="{{__('Title')}}" name="title" type="text"  placeholder="{{__('Title')}}" />
         <x-tomato-translation  class="col-span-2" label="{{__('Company')}}" name="company" type="text"  placeholder="{{__('Company')}}" />
         <div class="col-span-2" >
-            <x-tomato-translation  name="body[ar]" label="{{__('Body')}}" />
+            <x-tomato-translation name="body" label="{{__('Body')}}" type="markdown" />
         </div>
         <x-tomato-translation textarea class="col-span-2" label="{{__('Short Description')}}" name="short_description" type="text"  placeholder="{{__('Short Description')}}" />
         <x-tomato-translation textarea class="col-span-2" label="{{__('Keywords')}}" name="keywords" placeholder="{{__('Keywords')}}" autosize />
