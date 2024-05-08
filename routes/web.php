@@ -4,7 +4,7 @@
 use Illuminate\Support\Facades\Route;
 
 if (config("tomato-cms.features.pages")) {
-    Route::middleware(['web', 'auth', 'splade', 'verified'])->name('admin.')->group(function () {
+    Route::middleware(array_merge(['splade', 'auth'], config('tomato-admin.route_middlewares')))->name('admin.')->group(function () {
         Route::get('admin/pages', [\TomatoPHP\TomatoCms\Http\Controllers\PageController::class, 'index'])->name('pages.index');
         Route::get('admin/pages/api', [\TomatoPHP\TomatoCms\Http\Controllers\PageController::class, 'api'])->name('pages.api');
         Route::get('admin/pages/create', [\TomatoPHP\TomatoCms\Http\Controllers\PageController::class, 'create'])->name('pages.create');
@@ -17,7 +17,7 @@ if (config("tomato-cms.features.pages")) {
 }
 
 if (config("tomato-cms.features.services")) {
-    Route::middleware(['web', 'auth', 'splade', 'verified'])->name('admin.')->group(function () {
+    Route::middleware(array_merge(['splade', 'auth'], config('tomato-admin.route_middlewares')))->name('admin.')->group(function () {
         Route::get('admin/services', [\TomatoPHP\TomatoCms\Http\Controllers\ServiceController::class, 'index'])->name('services.index');
         Route::get('admin/services/api', [\TomatoPHP\TomatoCms\Http\Controllers\ServiceController::class, 'api'])->name('services.api');
         Route::get('admin/services/create', [\TomatoPHP\TomatoCms\Http\Controllers\ServiceController::class, 'create'])->name('services.create');
@@ -30,7 +30,7 @@ if (config("tomato-cms.features.services")) {
 }
 
 if (config("tomato-cms.features.portfolios")) {
-    Route::middleware(['web', 'auth', 'splade', 'verified'])->name('admin.')->group(function () {
+    Route::middleware(array_merge(['splade', 'auth'], config('tomato-admin.route_middlewares')))->name('admin.')->group(function () {
         Route::get('admin/portfolios', [\TomatoPHP\TomatoCms\Http\Controllers\PortfolioController::class, 'index'])->name('portfolios.index');
         Route::post('admin/portfolios/scan', [\TomatoPHP\TomatoCms\Http\Controllers\PortfolioController::class, 'scan'])->name('portfolios.scan');
         Route::get('admin/portfolios/api', [\TomatoPHP\TomatoCms\Http\Controllers\PortfolioController::class, 'api'])->name('portfolios.api');
@@ -44,7 +44,7 @@ if (config("tomato-cms.features.portfolios")) {
 }
 
 if (config("tomato-cms.features.testimonials")) {
-    Route::middleware(['web', 'auth', 'splade', 'verified'])->name('admin.')->group(function () {
+    Route::middleware(array_merge(['splade', 'auth'], config('tomato-admin.route_middlewares')))->name('admin.')->group(function () {
         Route::get('admin/testimonials', [\TomatoPHP\TomatoCms\Http\Controllers\TestimonialController::class, 'index'])->name('testimonials.index');
         Route::get('admin/testimonials/api', [\TomatoPHP\TomatoCms\Http\Controllers\TestimonialController::class, 'api'])->name('testimonials.api');
         Route::get('admin/testimonials/create', [\TomatoPHP\TomatoCms\Http\Controllers\TestimonialController::class, 'create'])->name('testimonials.create');
@@ -57,7 +57,7 @@ if (config("tomato-cms.features.testimonials")) {
 }
 
 if (config("tomato-cms.features.posts")) {
-    Route::middleware(['web', 'auth', 'splade', 'verified'])->name('admin.')->group(function () {
+    Route::middleware(array_merge(['splade', 'auth'], config('tomato-admin.route_middlewares')))->name('admin.')->group(function () {
         Route::get('admin/posts', [\TomatoPHP\TomatoCms\Http\Controllers\PostController::class, 'index'])->name('posts.index');
         Route::get('admin/posts/api', [\TomatoPHP\TomatoCms\Http\Controllers\PostController::class, 'api'])->name('posts.api');
         Route::get('admin/posts/create', [\TomatoPHP\TomatoCms\Http\Controllers\PostController::class, 'create'])->name('posts.create');
@@ -70,7 +70,7 @@ if (config("tomato-cms.features.posts")) {
 }
 
 if (config("tomato-cms.features.comments")) {
-    Route::middleware(['web', 'auth', 'splade', 'verified'])->name('admin.')->group(function () {
+    Route::middleware(array_merge(['splade', 'auth'], config('tomato-admin.route_middlewares')))->name('admin.')->group(function () {
         Route::get('admin/comments', [\TomatoPHP\TomatoCms\Http\Controllers\CommentController::class, 'index'])->name('comments.index');
         Route::get('admin/comments/api', [\TomatoPHP\TomatoCms\Http\Controllers\CommentController::class, 'api'])->name('comments.api');
         Route::get('admin/comments/create', [\TomatoPHP\TomatoCms\Http\Controllers\CommentController::class, 'create'])->name('comments.create');
@@ -83,7 +83,7 @@ if (config("tomato-cms.features.comments")) {
 }
 
 if (config("tomato-cms.features.photos")) {
-    Route::middleware(['web', 'auth', 'splade', 'verified'])->name('admin.')->group(function () {
+    Route::middleware(array_merge(['splade', 'auth'], config('tomato-admin.route_middlewares')))->name('admin.')->group(function () {
         Route::get('admin/photos', [\TomatoPHP\TomatoCms\Http\Controllers\PhotoController::class, 'index'])->name('photos.index');
         Route::get('admin/photos/api', [\TomatoPHP\TomatoCms\Http\Controllers\PhotoController::class, 'api'])->name('photos.api');
         Route::get('admin/photos/create', [\TomatoPHP\TomatoCms\Http\Controllers\PhotoController::class, 'create'])->name('photos.create');
@@ -96,7 +96,7 @@ if (config("tomato-cms.features.photos")) {
 }
 
 if (config("tomato-cms.features.skills")) {
-    Route::middleware(['web', 'auth', 'splade', 'verified'])->name('admin.')->group(function () {
+    Route::middleware(array_merge(['splade', 'auth'], config('tomato-admin.route_middlewares')))->name('admin.')->group(function () {
         Route::get('admin/skills', [\TomatoPHP\TomatoCms\Http\Controllers\SkillController::class, 'index'])->name('skills.index');
         Route::get('admin/skills/api', [\TomatoPHP\TomatoCms\Http\Controllers\SkillController::class, 'api'])->name('skills.api');
         Route::get('admin/skills/create', [\TomatoPHP\TomatoCms\Http\Controllers\SkillController::class, 'create'])->name('skills.create');
