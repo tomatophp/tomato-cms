@@ -1,5 +1,11 @@
 <x-tomato-admin-container label="{{trans('tomato-admin::global.crud.create')}} {{__('Portfolios')}}">
-    <x-splade-form class="flex flex-col space-y-4"  action="{{route('admin.portfolios.store')}}" method="post">
+    <x-splade-form :default="[
+        'body' => ['ar' => '', 'en'=> ''],
+        'title' => ['ar' => '', 'en'=> ''],
+        'company' => ['ar' => '', 'en'=> ''],
+        'short_description' => ['ar' => '', 'en'=> ''],
+        'keywords' => ['ar' => '', 'en'=> ''],
+    ]" class="flex flex-col space-y-4"  action="{{route('admin.portfolios.store')}}" method="post">
         <x-splade-file filepond preview name="feature" label="{{__('Featured Image')}}" />
         <x-splade-file filepond preview name="images[]" label="{{__('Images')}}"  multiple />
         <x-splade-select label="{{__('Service')}}" placeholder="{{__('Service')}}" name="service_id" remote-url="/admin/services/api" remote-root="data" option-label="name.{{app()->getLocale()}}" option-value="id" choices/>
